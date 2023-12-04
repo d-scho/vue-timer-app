@@ -3,9 +3,6 @@
   margin: 0;
   box-sizing: border-box;
 }
-html, body, #app, .wrapping-wrapper {
-  height: 100%;
-}
 .wrapping-wrapper {
   padding: 10px;
   display: flex;
@@ -33,6 +30,9 @@ textarea {
   border: 1px solid rgb(158, 158, 158);
   border-radius: 10px;
   background-color: rgba(120, 120, 120, 0.1);
+}
+.flex-end-1250-center {
+  justify-content: end;
 }
 input.text {
   height: 34px;

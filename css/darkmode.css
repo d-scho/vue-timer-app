@@ -1,7 +1,7 @@
 .darkmode .mode-toggle-switch {
   transform: translateX(100%);
 }
-.darkmode.wrapping-wrapper {
+body:has(.darkmode.wrapping-wrapper) {
   background-color: rgb(29, 29, 29);
 }
 .darkmode textarea, .darkmode .wrapper {

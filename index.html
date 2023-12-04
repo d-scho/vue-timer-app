@@ -33,6 +33,9 @@
                     <button :id="counter.id" class="timer-control-reset" @click="resetTimer" :disabled="counter.resetTimerDisabled">Reset Timer</button>
                     <span>{{ counter.display }}</span>
                 </div>
+                <div class="wrapper flex-end-1250-center">
+                    <span>{{ counterSum }}</span>
+                </div>
             </div>
             <div class="add">
                 <textarea

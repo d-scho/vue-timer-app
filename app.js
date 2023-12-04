@@ -1,7 +1,7 @@
 Vue.createApp({
 data: () => ({
     counters: {},
-    numberOfCountersWanted: 12, // quickly set the number of counters wanted here - careful: if you select fewer than there were before, data might be lost
+    numberOfCountersWanted: 11, // quickly set the number of counters wanted here - careful: if you select fewer than there were before, data might be lost
     counterData: {},
     textareaContent: '',
     darkmodeEnabled: false
@@ -35,7 +35,14 @@ computed: {
         let dayOfYear = fullDaysPassed + 1; // + 1 because the present day, which is not completed, counts towards it, too
         let weekNumber = Math.ceil(( dayOfYear - ( firstMonday() - 1 ) ) / 7) // fix the offset caused by the monday not being the first, e.g. firstMonday = 3 needs an offset by 2, because we start at Jan 1st, not Oth
         return weekNumber !== 0 ? weekNumber : 52 // if the weekNumber is 0, it is the 52nd week of the prior year
-    }
+    },
+    counterSum: function() {
+        let sum = 0;
+        for (counter in this.counters) {
+            sum += this.counters[counter].value;
+        }
+        return this.convertMillisecondsToReadableFormat(sum);
+    },
 },
 mounted() {
 
