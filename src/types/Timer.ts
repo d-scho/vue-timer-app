@@ -2,7 +2,6 @@ export type Timer = {
 	id: number;
 	name: string;
 	value: number;
-	startOrResumeText: string;
 	display: string;
 	interval?: number;
 	nameChangeDisabled: boolean;

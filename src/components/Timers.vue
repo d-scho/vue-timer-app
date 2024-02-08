@@ -5,7 +5,7 @@ import { type Timer } from '../types/Timer';
 import convertMillisecondsToReadableFormat from '../methods/convertMillisecondsToReadableFormat';
 import { getStoredTimers, setStoredTimers } from '../methods/localStorageHandling';
 
-const numberOfTimersWanted = 11;  // quickly set the number of timers wanted here - careful: if you select fewer than there were before, data might be lost
+const numberOfTimersWanted = 5;  // quickly set the number of timers wanted here - careful: if you select fewer than there were before, data might be lost
 const timers = ref<Timer[]>([]);
 const timerSum = computed(() => {
     let sum = 0;
@@ -16,50 +16,29 @@ const timerSum = computed(() => {
 });
 
 // create timer instances based on number of timer wanted
+const storedTimers = getStoredTimers();
 for (let i = 1; i <= numberOfTimersWanted; i++) {
+    const storedTimer = storedTimers.find(timerDTO => timerDTO.id === i);
     timers.value.push({
         id: i,
-        name: '',
-        startOrResumeText: 'Start timer',
-        value: 0,
-        display: '00:00:00',
+        name: storedTimer?.name ?? '',
+        value: storedTimer?.value ?? 0,
+        display: storedTimer?.value ? convertMillisecondsToReadableFormat(storedTimer.value) : '00:00:00',
         nameChangeDisabled: false,
-        inputReadOnly: false,
+        inputReadOnly: storedTimer?.name && storedTimer.name.length > 0 ? true : false,
         startTimerDisabled: false,
         stopTimerDisabled: true,
-        resetTimerDisabled: true
+        resetTimerDisabled: storedTimer?.value && storedTimer.value !== 0 ? false : true,
     });
 }
-
-// fill data with stored data
-getStoredTimers().forEach(timerDTO => {
-    const timer = timers.value.find(el => el.id === timerDTO.id);
-    if (timer) {
-        timer.name = timerDTO.name;
-        timer.value = timerDTO.value;
-    }
-});
-
-// TODO: Remove these properties and compute them in the template section instead
-timers.value.forEach(timer => {
-    if (timer.name.length > 0) {
-        timer.inputReadOnly = true;
-        timer.nameChangeDisabled = false;
-    }
-    if (timer.value !== 0) {
-        timer.startOrResumeText = 'Resume timer';
-        timer.resetTimerDisabled = false;
-    }
-    timer.display = convertMillisecondsToReadableFormat(timer.value);
-});
 
 // template ref
 const timerRefs = ref<Array<HTMLElement>|null>(null);
 
 function startTimer(timer: Timer) {
+    timer.value += 1; // instantly add one one millisecond to trigger depending renderers
     timer.startTimerDisabled = true;
     timer.stopTimerDisabled = false;
-    timer.startOrResumeText = 'Resume timer';
     timer.resetTimerDisabled = false;
     let storedTime = timer.value;
     let startingTime = Number(new Date());
@@ -84,7 +63,6 @@ function resetTimer(timer: Timer) {
     timer.resetTimerDisabled = true;
     clearInterval(timer.interval);
     timer.interval = undefined; // TODO: is this needed? all cases
-    timer.startOrResumeText = 'Start timer'; // TODO: Use enums for all label variations
     timer.value = 0;
     timer.display = convertMillisecondsToReadableFormat(timer.value);
     setStoredTimers(timers.value.map(timer => ({ id: timer.id, name: timer.name, value: timer.value })));
@@ -128,7 +106,13 @@ function resetName(timer: Timer) {
 				:readonly="timer.inputReadOnly"
 				placeholder="Issue / topic"
 			>
-			<button class="timer-control" @click="startTimer(timer)" :disabled="timer.startTimerDisabled">{{ timer.startOrResumeText }}</button>
+			<button
+                class="timer-control"
+                @click="startTimer(timer)"
+                :disabled="timer.startTimerDisabled"
+            >
+                {{ timer.value > 0 ? 'Resume timer' : 'Start timer' }}
+            </button>
 			<button class="timer-control" @click="stopTimer(timer)" :disabled="timer.stopTimerDisabled">Stop timer</button>
 			<button class="timer-control-reset" @click="resetTimer(timer)" :disabled="timer.resetTimerDisabled">Reset timer</button>
 			<span>{{ timer.display }}</span>
