@@ -1,12 +1,7 @@
-declare module '*.vue';
-
-type StoredTimer = {
+export type Timer = {
 	id: number;
 	name: string;
 	value: number;
-  }
-  
-type Timer = StoredTimer & {
 	startOrResumeText: string;
 	display: string;
 	interval?: number;
@@ -16,3 +11,5 @@ type Timer = StoredTimer & {
 	stopTimerDisabled: boolean;
 	resetTimerDisabled: boolean;
 };
+
+export type TimerDTO = Pick<Timer, 'id' | 'name' | 'value'>;

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { type Timer } from '../types/Timer';
 
 import convertMillisecondsToReadableFormat from '../methods/convertMillisecondsToReadableFormat';
 import { getStoredTimers, setStoredTimers } from '../methods/localStorageHandling';
 
-// essential variables
 const numberOfTimersWanted = 11;  // quickly set the number of timers wanted here - careful: if you select fewer than there were before, data might be lost
 const timers = ref<Timer[]>([]);
 const timerSum = computed(() => {
@@ -14,7 +14,6 @@ const timerSum = computed(() => {
     });
     return convertMillisecondsToReadableFormat(sum);
 });
-const storedTimers = ref<StoredTimer[]>([]);
 
 // create timer instances based on number of timer wanted
 for (let i = 1; i <= numberOfTimersWanted; i++) {
@@ -33,178 +32,83 @@ for (let i = 1; i <= numberOfTimersWanted; i++) {
 }
 
 // fill data with stored data
-storedTimers.value = getStoredTimers();
-storedTimers.value.forEach(element => {
-    const timer = timers.value.find(el => el.id === element.id);
+getStoredTimers().forEach(timerDTO => {
+    const timer = timers.value.find(el => el.id === timerDTO.id);
     if (timer) {
-        timer.name = element.name;
-        timer.value = element.value;
+        timer.name = timerDTO.name;
+        timer.value = timerDTO.value;
     }
 });
 
 // TODO: Remove these properties and compute them in the template section instead
 timers.value.forEach(timer => {
-    // set readonly of input to true and enable the "edit name" and "reset name" buttons where a name is given
     if (timer.name.length > 0) {
         timer.inputReadOnly = true;
         timer.nameChangeDisabled = false;
     }
-    // rename the "start timer" button to "resume timer" and enable resetting if there is already time saved
     if (timer.value !== 0) {
         timer.startOrResumeText = 'Resume timer';
         timer.resetTimerDisabled = false;
     }
-    // initialize the displays of all timers via converting milliseconds to hh:mm:ss format
     timer.display = convertMillisecondsToReadableFormat(timer.value);
 });
 
 // template ref
 const timerRefs = ref<Array<HTMLElement>|null>(null);
 
-// timer handling
 function startTimer(timer: Timer) {
-     // swap button enables/disables and rename "start timer" button because time is running
     timer.startTimerDisabled = true;
     timer.stopTimerDisabled = false;
     timer.startOrResumeText = 'Resume timer';
     timer.resetTimerDisabled = false;
-
-    // get currently stored time
     let storedTime = timer.value;
-    // initialize a starting time
     let startingTime = Number(new Date());
-
-    // set up an interval for the timer based on id with an executing interval of 500 milliseconds
     timer.interval = setInterval(() => {
         timer.value = Number(new Date()) - startingTime + storedTime;
         timer.display = convertMillisecondsToReadableFormat(timer.value);
-
-        // store the value after each iteration, so the saving works even when window is closed while running
-        let storedTimer = storedTimers.value.find(el => el.id === timer.id);
-        if (!storedTimer) {
-            storedTimer = {
-              id: timer.id,
-              name: timer.name,
-              value: timer.value,
-            };
-            storedTimers.value.push(storedTimer);
-        } else {
-          storedTimer.value = timer.value;
-        }
-        setStoredTimers(storedTimers.value);
+        setStoredTimers(timers.value.map(timer => ({ id: timer.id, name: timer.name, value: timer.value })));
     }, 500);
 };
 
 function stopTimer(timer: Timer) {
-    // swap button enables/disables
     timer.startTimerDisabled = false;
     timer.stopTimerDisabled = true;
-
-    // clear the interval and restore it to null
     clearInterval(timer.interval);
     timer.interval = undefined;
-
-    // save data a final time to get exact time of stop
-    let storedTimer = storedTimers.value.find(el => el.id === timer.id);
-    if (!storedTimer) {
-        storedTimer = {
-          id: timer.id,
-          name: '',
-          value: 0,
-        };
-        storedTimers.value.push(storedTimer);
-    }
-    storedTimer.value = timer.value;
-    setStoredTimers(storedTimers.value);
+    setStoredTimers(timers.value.map(timer => ({ id: timer.id, name: timer.name, value: timer.value })));
 };
 
 function resetTimer(timer: Timer) {
-    // swap button enables/disables
     timer.startTimerDisabled = false;
     timer.stopTimerDisabled = true;
     timer.resetTimerDisabled = true;
-    
-    // clear the interval and restore it to null
     clearInterval(timer.interval);
-    timer.interval = undefined;
-
-    // reset the "resume timer" button to "start timer"
-    timer.startOrResumeText = 'Start timer';
-
-    // reset the displayed value
+    timer.interval = undefined; // TODO: is this needed? all cases
+    timer.startOrResumeText = 'Start timer'; // TODO: Use enums for all label variations
     timer.value = 0;
     timer.display = convertMillisecondsToReadableFormat(timer.value);
-
-    // save the reset to local storage
-    let storedTimer = storedTimers.value.find(el => el.id === timer.id);
-    if (!storedTimer) {
-        storedTimer = {
-          id: timer.id,
-          name: '',
-          value: 0,
-        };
-        storedTimers.value.push(storedTimer);
-    }
-    storedTimer.value = timer.value;
-    setStoredTimers(storedTimers.value);
+    setStoredTimers(timers.value.map(timer => ({ id: timer.id, name: timer.name, value: timer.value })));
 };
 
 function makeNameEditable(timer: Timer) {
-    // make the input editable and focus it via the ref which is just the id of all of the buttons
     timer.inputReadOnly = false;
     // TODO: In any cases that try to find the element like this, try to pass the element to the method instead
-    if (timerRefs.value) {
-      (timerRefs.value as HTMLElement[]).find(el => el.id === String(timer.id))?.focus();
-    }
-
-    // disable "edit name" and "reset name" buttons for the time being
+    if (timerRefs.value) (timerRefs.value as HTMLElement[]).find(el => el.id === String(timer.id))?.focus();
     timer.nameChangeDisabled = true;
 };
 
 function confirmNameChange(timer: Timer) {
-    // enable "edit name" and "reset name" buttons if text is put in, otherwise it can stay the same
-    if (timer.name.length > 0) {
-        timer.inputReadOnly = true;
-    }
+    if (timer.name.length > 0) timer.inputReadOnly = true;
     timer.nameChangeDisabled = false;
-
-    // unfocus the input via the ref which is just the id of all of the buttons
-    if (timerRefs.value) {
-      (timerRefs.value as HTMLElement[]).find(el => el.id === String(timer.id))?.blur();
-    }
-
-    // save the new name to local storage
-    let storedTimer = storedTimers.value.find(el => el.id === timer.id);
-    if (!storedTimer) {
-        storedTimer = {
-          id: timer.id,
-          name: '',
-          value: 0,
-        };
-        storedTimers.value.push(storedTimer);
-    }
-    storedTimer.name = timer.name;
-    setStoredTimers(storedTimers.value);
+    if (timerRefs.value) (timerRefs.value as HTMLElement[]).find(el => el.id === String(timer.id))?.blur();
+    setStoredTimers(timers.value.map(timer => ({ id: timer.id, name: timer.name, value: timer.value })));
 };
 
 function resetName(timer: Timer) {
-    // reset name in view, disable "edit name" and "reset name" buttons and allow input editing
     timer.name  = '';
     timer.nameChangeDisabled = false;
     timer.inputReadOnly = false;
-
-    // save the reset to local storage
-    let storedTimer = storedTimers.value.find(el => el.id === timer.id);
-    if (!storedTimer) {
-        storedTimer = {
-          id: timer.id,
-          name: '',
-          value: 0,
-        };
-        storedTimers.value.push(storedTimer);
-    }
-    storedTimer.name = timer.name;
-    setStoredTimers(storedTimers.value);
+    setStoredTimers(timers.value.map(timer => ({ id: timer.id, name: timer.name, value: timer.value })));
 };
 </script>
 

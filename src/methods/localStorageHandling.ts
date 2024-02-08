@@ -1,3 +1,5 @@
+import { type TimerDTO } from '../types/Timer';
+
 const LocalStorageKey = {
     storedIsDarkmodeEnabled: 'vue-timer-app_isDarkmodeEnabled',
     storedNotes: 'vue-timer-app_notes',
@@ -34,7 +36,7 @@ export function setStoredNotes(value: string) {
 };
 
 // timers handling
-export function getStoredTimers(): Array<StoredTimer> {
+export function getStoredTimers(): Array<TimerDTO> {
     const storage = localStorage.getItem(LocalStorageKey.storedTimers);
     if (storage) {
       return JSON.parse(storage);
@@ -42,6 +44,6 @@ export function getStoredTimers(): Array<StoredTimer> {
       return [];
     }
 };
-export function setStoredTimers(value: Array<StoredTimer>) {
+export function setStoredTimers(value: Array<TimerDTO>) {
     localStorage.setItem(LocalStorageKey.storedTimers, JSON.stringify(value));
 };
