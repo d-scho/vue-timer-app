@@ -7,7 +7,7 @@
       width: 100%;
       flex-shrink: 0;
   }
-  .wrapping-wrapper > .counters {
+  .wrapping-wrapper > .timers {
       flex-flow: row wrap;
       justify-content: center;
   }

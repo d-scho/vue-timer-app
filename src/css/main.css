@@ -11,7 +11,7 @@
 .wrapping-wrapper > div {
   flex: 1 1 0;
 }
-.wrapping-wrapper > .counters {
+.wrapping-wrapper > .timers {
   display: flex;
   flex-direction: column;
   gap: 15px;

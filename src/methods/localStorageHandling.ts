@@ -1,7 +1,7 @@
 const LocalStorageKey = {
-    storedDarkModeSetting: 'counterDarkmodeEnabled',
-    storedTextareaContent: 'counterTextarea',
-    storedCounters: 'counterStoredCounters',
+    storedDarkModeSetting: 'vue-timer-app_isDarkmodeEnabled',
+    storedTextareaContent: 'vue-timer-app_textareaContent',
+    storedTimers: 'vue-timer-app_storedTimers',
 } as const;
 
 // darkmode handling
@@ -34,15 +34,15 @@ export function setStoredTextareaContent(value: string) {
     localStorage.setItem(LocalStorageKey.storedTextareaContent, value);
 };
 
-// counters handling
-export function getStoredCounters(): Array<StoredCounter> {
-    const storage = localStorage.getItem(LocalStorageKey.storedCounters);
+// timers handling
+export function getStoredTimers(): Array<StoredTimer> {
+    const storage = localStorage.getItem(LocalStorageKey.storedTimers);
     if (storage) {
       return JSON.parse(storage);
     } else {
       return [];
     }
 };
-export function setStoredCounters(value: Array<StoredCounter>) {
-    localStorage.setItem(LocalStorageKey.storedCounters, JSON.stringify(value));
+export function setStoredTimers(value: Array<StoredTimer>) {
+    localStorage.setItem(LocalStorageKey.storedTimers, JSON.stringify(value));
 };

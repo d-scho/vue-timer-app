@@ -1,27 +1,27 @@
 <template>
     <div :class="{ darkmode: darkmodeEnabled }" class="wrapping-wrapper">
-        <div class="counters">
-            <div v-for="counter in counters" class="wrapper">
-                <button class="edit-name" @click="makeNameEditable(counter)" :disabled="counter.nameChangeDisabled">Edit name</button>
-                <button class="reset-name" @click="resetName(counter)" :disabled="counter.name.length === 0">Reset name</button>
+        <div class="timers">
+            <div v-for="timer in timers" class="wrapper">
+                <button class="edit-name" @click="makeNameEditable(timer)" :disabled="timer.nameChangeDisabled">Edit name</button>
+                <button class="reset-name" @click="resetName(timer)" :disabled="timer.name.length === 0">Reset name</button>
                 <input
                     class="text"
                     type="text"
-                    ref="counterRefs"
-                    :id="String(counter.id)"
-                    v-model.lazy="counter.name"
-                    @keydown.enter="confirmNameChange(counter)"
-                    @focusout="confirmNameChange(counter)"
-                    :readonly="counter.inputReadOnly"
+                    ref="timerRefs"
+                    :id="String(timer.id)"
+                    v-model.lazy="timer.name"
+                    @keydown.enter="confirmNameChange(timer)"
+                    @focusout="confirmNameChange(timer)"
+                    :readonly="timer.inputReadOnly"
                     placeholder="Issue / topic"
                 >
-                <button class="timer-control" @click="startTimer(counter)" :disabled="counter.startTimerDisabled">{{ counter.startOrResumeText }}</button>
-                <button class="timer-control" @click="stopTimer(counter)" :disabled="counter.stopTimerDisabled">Stop timer</button>
-                <button class="timer-control-reset" @click="resetTimer(counter)" :disabled="counter.resetTimerDisabled">Reset timer</button>
-                <span>{{ counter.display }}</span>
+                <button class="timer-control" @click="startTimer(timer)" :disabled="timer.startTimerDisabled">{{ timer.startOrResumeText }}</button>
+                <button class="timer-control" @click="stopTimer(timer)" :disabled="timer.stopTimerDisabled">Stop timer</button>
+                <button class="timer-control-reset" @click="resetTimer(timer)" :disabled="timer.resetTimerDisabled">Reset timer</button>
+                <span>{{ timer.display }}</span>
             </div>
             <div class="wrapper flex-end-1250-center">
-                <span>{{ counterSum }}</span>
+                <span>{{ timerSum }}</span>
             </div>
         </div>
         <div class="add">
@@ -63,25 +63,25 @@ import {
     setStoredDarkmodeSetting,
     getStoredTextareaContent,
     setStoredTextareaContent,
-    getStoredCounters,
-    setStoredCounters,
+    getStoredTimers,
+    setStoredTimers,
  } from './methods/localStorageHandling';
 
 // essential variables
-const numberOfCountersWanted = 11;  // quickly set the number of counters wanted here - careful: if you select fewer than there were before, data might be lost
-const counters = ref<Counter[]>([]);
-const counterSum = computed(() => {
+const numberOfTimersWanted = 11;  // quickly set the number of timers wanted here - careful: if you select fewer than there were before, data might be lost
+const timers = ref<Timer[]>([]);
+const timerSum = computed(() => {
     let sum = 0;
-    counters.value.forEach(counter => {
-      sum += counter.value;
+    timers.value.forEach(timer => {
+      sum += timer.value;
     });
     return convertMillisecondsToReadableFormat(sum);
 });
-const storedCounters = ref<StoredCounter[]>([]);
+const storedTimers = ref<StoredTimer[]>([]);
 
-// create counter instances based on number of counters wanted
-for (let i = 1; i <= numberOfCountersWanted; i++) {
-    counters.value.push({
+// create timer instances based on number of timer wanted
+for (let i = 1; i <= numberOfTimersWanted; i++) {
+    timers.value.push({
         id: i,
         name: '',
         startOrResumeText: 'Start timer',
@@ -96,33 +96,33 @@ for (let i = 1; i <= numberOfCountersWanted; i++) {
 }
 
 // fill data with stored data
-storedCounters.value = getStoredCounters();
-storedCounters.value.forEach(element => {
-    const counter = counters.value.find(el => el.id === element.id);
-    if (counter) {
-        counter.name = element.name;
-        counter.value = element.value;
+storedTimers.value = getStoredTimers();
+storedTimers.value.forEach(element => {
+    const timer = timers.value.find(el => el.id === element.id);
+    if (timer) {
+        timer.name = element.name;
+        timer.value = element.value;
     }
 });
 
 // TODO: Remove these properties and compute them in the template section instead
-counters.value.forEach(counter => {
+timers.value.forEach(timer => {
     // set readonly of input to true and enable the "edit name" and "reset name" buttons where a name is given
-    if (counter.name.length > 0) {
-        counter.inputReadOnly = true;
-        counter.nameChangeDisabled = false;
+    if (timer.name.length > 0) {
+        timer.inputReadOnly = true;
+        timer.nameChangeDisabled = false;
     }
     // rename the "start timer" button to "resume timer" and enable resetting if there is already time saved
-    if (counter.value !== 0) {
-        counter.startOrResumeText = 'Resume timer';
-        counter.resetTimerDisabled = false;
+    if (timer.value !== 0) {
+        timer.startOrResumeText = 'Resume timer';
+        timer.resetTimerDisabled = false;
     }
-    // initialize the displays of all counters via converting milliseconds to hh:mm:ss format
-    counter.display = convertMillisecondsToReadableFormat(counter.value);
+    // initialize the displays of all timers via converting milliseconds to hh:mm:ss format
+    timer.display = convertMillisecondsToReadableFormat(timer.value);
 });
 
 // template ref
-const counterRefs = ref(null);
+const timerRefs = ref<Array<HTMLElement>|null>(null);
 
 // darkmode handling
 const darkmodeEnabled = ref(getStoredDarkmodeSetting());
@@ -141,148 +141,148 @@ const dayOfYear = ref(getDayOfYear());
 const calendarWeek = ref(getCalendarWeek());
 
 // timer handling
-function startTimer(counter: Counter) {
+function startTimer(timer: Timer) {
      // swap button enables/disables and rename "start timer" button because time is running
-    counter.startTimerDisabled = true;
-    counter.stopTimerDisabled = false;
-    counter.startOrResumeText = 'Resume timer';
-    counter.resetTimerDisabled = false;
+    timer.startTimerDisabled = true;
+    timer.stopTimerDisabled = false;
+    timer.startOrResumeText = 'Resume timer';
+    timer.resetTimerDisabled = false;
 
     // get currently stored time
-    let storedTime = counter.value;
+    let storedTime = timer.value;
     // initialize a starting time
     let startingTime = Number(new Date());
 
-    // set up an interval for the counter based on id with an executing interval of 500 milliseconds
-    counter.interval = setInterval(() => {
-        counter.value = Number(new Date()) - startingTime + storedTime;
-        counter.display = convertMillisecondsToReadableFormat(counter.value);
+    // set up an interval for the timer based on id with an executing interval of 500 milliseconds
+    timer.interval = setInterval(() => {
+        timer.value = Number(new Date()) - startingTime + storedTime;
+        timer.display = convertMillisecondsToReadableFormat(timer.value);
 
         // store the value after each iteration, so the saving works even when window is closed while running
-        let storedCounter = storedCounters.value.find(el => el.id === counter.id);
-        if (!storedCounter) {
-            storedCounter = {
-              id: counter.id,
-              name: counter.name,
-              value: counter.value,
+        let storedTimer = storedTimers.value.find(el => el.id === timer.id);
+        if (!storedTimer) {
+            storedTimer = {
+              id: timer.id,
+              name: timer.name,
+              value: timer.value,
             };
-            storedCounters.value.push(storedCounter);
+            storedTimers.value.push(storedTimer);
         } else {
-          storedCounter.value = counter.value;
+          storedTimer.value = timer.value;
         }
-        setStoredCounters(storedCounters.value);
+        setStoredTimers(storedTimers.value);
     }, 500);
 };
 
-function stopTimer(counter: Counter) {
+function stopTimer(timer: Timer) {
     // swap button enables/disables
-    counter.startTimerDisabled = false;
-    counter.stopTimerDisabled = true;
+    timer.startTimerDisabled = false;
+    timer.stopTimerDisabled = true;
 
     // clear the interval and restore it to null
-    clearInterval(counter.interval);
-    counter.interval = undefined;
+    clearInterval(timer.interval);
+    timer.interval = undefined;
 
     // save data a final time to get exact time of stop
-    let storedCounter = storedCounters.value.find(el => el.id === counter.id);
-    if (!storedCounter) {
-        storedCounter = {
-          id: counter.id,
+    let storedTimer = storedTimers.value.find(el => el.id === timer.id);
+    if (!storedTimer) {
+        storedTimer = {
+          id: timer.id,
           name: '',
           value: 0,
         };
-        storedCounters.value.push(storedCounter);
+        storedTimers.value.push(storedTimer);
     }
-    storedCounter.value = counter.value;
-    setStoredCounters(storedCounters.value);
+    storedTimer.value = timer.value;
+    setStoredTimers(storedTimers.value);
 };
 
-function resetTimer(counter: Counter) {
+function resetTimer(timer: Timer) {
     // swap button enables/disables
-    counter.startTimerDisabled = false;
-    counter.stopTimerDisabled = true;
-    counter.resetTimerDisabled = true;
+    timer.startTimerDisabled = false;
+    timer.stopTimerDisabled = true;
+    timer.resetTimerDisabled = true;
     
     // clear the interval and restore it to null
-    clearInterval(counter.interval);
-    counter.interval = undefined;
+    clearInterval(timer.interval);
+    timer.interval = undefined;
 
     // reset the "resume timer" button to "start timer"
-    counter.startOrResumeText = 'Start timer';
+    timer.startOrResumeText = 'Start timer';
 
     // reset the displayed value
-    counter.value = 0;
-    counter.display = convertMillisecondsToReadableFormat(counter.value);
+    timer.value = 0;
+    timer.display = convertMillisecondsToReadableFormat(timer.value);
 
     // save the reset to local storage
-    let storedCounter = storedCounters.value.find(el => el.id === counter.id);
-    if (!storedCounter) {
-        storedCounter = {
-          id: counter.id,
+    let storedTimer = storedTimers.value.find(el => el.id === timer.id);
+    if (!storedTimer) {
+        storedTimer = {
+          id: timer.id,
           name: '',
           value: 0,
         };
-        storedCounters.value.push(storedCounter);
+        storedTimers.value.push(storedTimer);
     }
-    storedCounter.value = counter.value;
-    setStoredCounters(storedCounters.value);
+    storedTimer.value = timer.value;
+    setStoredTimers(storedTimers.value);
 };
 
-function makeNameEditable(counter: Counter) {
+function makeNameEditable(timer: Timer) {
     // make the input editable and focus it via the ref which is just the id of all of the buttons
-    counter.inputReadOnly = false;
+    timer.inputReadOnly = false;
     // TODO: In any cases that try to find the element like this, try to pass the element to the method instead
-    if (counterRefs.value) {
-      (counterRefs.value as HTMLElement[]).find(el => el.id === String(counter.id))?.focus();
+    if (timerRefs.value) {
+      (timerRefs.value as HTMLElement[]).find(el => el.id === String(timer.id))?.focus();
     }
 
     // disable "edit name" and "reset name" buttons for the time being
-    counter.nameChangeDisabled = true;
+    timer.nameChangeDisabled = true;
 };
 
-function confirmNameChange(counter: Counter) {
+function confirmNameChange(timer: Timer) {
     // enable "edit name" and "reset name" buttons if text is put in, otherwise it can stay the same
-    if (counter.name.length > 0) {
-        counter.inputReadOnly = true;
+    if (timer.name.length > 0) {
+        timer.inputReadOnly = true;
     }
-    counter.nameChangeDisabled = false;
+    timer.nameChangeDisabled = false;
 
     // unfocus the input via the ref which is just the id of all of the buttons
-    if (counterRefs.value) {
-      (counterRefs.value as HTMLElement[]).find(el => el.id === String(counter.id))?.blur();
+    if (timerRefs.value) {
+      (timerRefs.value as HTMLElement[]).find(el => el.id === String(timer.id))?.blur();
     }
 
     // save the new name to local storage
-    let storedCounter = storedCounters.value.find(el => el.id === counter.id);
-    if (!storedCounter) {
-        storedCounter = {
-          id: counter.id,
+    let storedTimer = storedTimers.value.find(el => el.id === timer.id);
+    if (!storedTimer) {
+        storedTimer = {
+          id: timer.id,
           name: '',
           value: 0,
         };
-        storedCounters.value.push(storedCounter);
+        storedTimers.value.push(storedTimer);
     }
-    storedCounter.name = counter.name;
-    setStoredCounters(storedCounters.value);
+    storedTimer.name = timer.name;
+    setStoredTimers(storedTimers.value);
 };
 
-function resetName(counter: Counter) {
+function resetName(timer: Timer) {
     // reset name in view, disable "edit name" and "reset name" buttons and allow input editing
-    counter.name  = '';
-    counter.nameChangeDisabled = false;
-    counter.inputReadOnly = false;
+    timer.name  = '';
+    timer.nameChangeDisabled = false;
+    timer.inputReadOnly = false;
 
     // save the reset to local storage
-    let storedCounter = storedCounters.value.find(el => el.id === counter.id);
-    if (!storedCounter) {
-        storedCounter = {
-          id: counter.id,
+    let storedTimer = storedTimers.value.find(el => el.id === timer.id);
+    if (!storedTimer) {
+        storedTimer = {
+          id: timer.id,
           name: '',
           value: 0,
         };
-        storedCounters.value.push(storedCounter);
+        storedTimers.value.push(storedTimer);
     }
-    storedCounter.name = counter.name;
-    setStoredCounters(storedCounters.value);
+    storedTimer.name = timer.name;
+    setStoredTimers(storedTimers.value);
 };
 </script>

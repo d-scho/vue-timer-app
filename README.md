@@ -1,8 +1,8 @@
-# vue-counter-app
+# vue-timer-app
 
-- one pager counter with lightmode and darkmode
-- only real setting available is under <code>app.js</code>'s data method returned object of the Vue component, where you can set <code>numberOfCountersWanted</code> to any number (setting less than on running before discards the data of the counters > new number)
-- localStorage key <code>counterData</code> is used for storage
+- timer app with lightmode and darkmode
+- only real setting available is under <code>app.js</code>'s data method returned object of the Vue component, where you can set <code>numberOfTimersWanted</code> to any number (setting less than on running before discards the data of the timers > new number)
+- localStorage keys `vue-timer-app_isDarkmodeEnabled`, `vue-timer-app_textareaContent`, `vue-timer-app_storedTimers` are used to store data
 
 ## Project Setup
 
