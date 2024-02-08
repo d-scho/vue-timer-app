@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineModel, nextTick } from 'vue';
-import { setStoredIsDarkmodeEnabled } from '../methods/localStorageHandling';
+import { setStoredIsDarkmodeEnabled } from '@/methods/localStorageHandling';
 
 const isDarkmodeEnabled = defineModel({ type: Boolean, required: true, });
 

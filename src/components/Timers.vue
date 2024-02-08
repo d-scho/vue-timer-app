@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { type Timer } from '../types/Timer';
+import { type Timer } from '@/types/Timer';
 
-import convertMillisecondsToReadableFormat from '../methods/convertMillisecondsToReadableFormat';
-import { getStoredTimers, setStoredTimers } from '../methods/localStorageHandling';
+import { useLabels } from '@/composables/useLabels';
+
+import convertMillisecondsToReadableFormat from '@/methods/convertMillisecondsToReadableFormat';
+import { getStoredTimers, setStoredTimers } from '@/methods/localStorageHandling';
+
+const { Labels } = useLabels();
 
 const numberOfTimersWanted = 5;  // quickly set the number of timers wanted here - careful: if you select fewer than there were before, data might be lost
 const timers = ref<Timer[]>([]);
@@ -23,7 +27,10 @@ for (let i = 1; i <= numberOfTimersWanted; i++) {
         id: i,
         name: storedTimer?.name ?? '',
         value: storedTimer?.value ?? 0,
-        display: storedTimer?.value ? convertMillisecondsToReadableFormat(storedTimer.value) : '00:00:00',
+        display:
+            storedTimer?.value
+                ? convertMillisecondsToReadableFormat(storedTimer.value)
+                : convertMillisecondsToReadableFormat(0),
         nameChangeDisabled: false,
         inputReadOnly: storedTimer?.name && storedTimer.name.length > 0 ? true : false,
         startTimerDisabled: false,
@@ -62,7 +69,7 @@ function resetTimer(timer: Timer) {
     timer.stopTimerDisabled = true;
     timer.resetTimerDisabled = true;
     clearInterval(timer.interval);
-    timer.interval = undefined; // TODO: is this needed? all cases
+    timer.interval = undefined;
     timer.value = 0;
     timer.display = convertMillisecondsToReadableFormat(timer.value);
     setStoredTimers(timers.value.map(timer => ({ id: timer.id, name: timer.name, value: timer.value })));
@@ -93,8 +100,24 @@ function resetName(timer: Timer) {
 <template>
 	<div class="timers">
 		<div v-for="timer in timers" class="wrapper">
-			<button class="edit-name" @click="makeNameEditable(timer)" :disabled="timer.nameChangeDisabled">Edit name</button>
-			<button class="reset-name" @click="resetName(timer)" :disabled="timer.name.length === 0">Reset name</button>
+
+			<button
+                class="edit-name"
+                @click="makeNameEditable(timer)"
+                :disabled="timer.nameChangeDisabled"
+            >
+                {{ Labels.EDIT_NAME }}
+            </button>
+
+			<button
+                class="reset-name"
+                @click="resetName(timer)"
+                :disabled="timer.name.
+                length === 0"
+            >
+                {{ Labels.RESET_NAME }}
+            </button>
+
 			<input
 				class="text"
 				type="text"
@@ -106,16 +129,33 @@ function resetName(timer: Timer) {
 				:readonly="timer.inputReadOnly"
 				placeholder="Issue / topic"
 			>
+
 			<button
                 class="timer-control"
                 @click="startTimer(timer)"
                 :disabled="timer.startTimerDisabled"
             >
-                {{ timer.value > 0 ? 'Resume timer' : 'Start timer' }}
+                {{ timer.value > 0 ? Labels.RESUME_TIMER : Labels.START_TIMER }}
             </button>
-			<button class="timer-control" @click="stopTimer(timer)" :disabled="timer.stopTimerDisabled">Stop timer</button>
-			<button class="timer-control-reset" @click="resetTimer(timer)" :disabled="timer.resetTimerDisabled">Reset timer</button>
+
+			<button
+                class="timer-control"
+                @click="stopTimer(timer)"
+                :disabled="timer.stopTimerDisabled"
+            >
+                {{ Labels.STOP_TIMER }}
+            </button>
+
+			<button
+                class="timer-control-reset"
+                @click="resetTimer(timer)"
+                :disabled="timer.resetTimerDisabled"
+            >
+                {{ Labels.RESET_TIMER }}
+            </button>
+
 			<span>{{ timer.display }}</span>
+
 		</div>
 		<div class="wrapper flex-end-1250-center">
 			<span>{{ timerSum }}</span>
