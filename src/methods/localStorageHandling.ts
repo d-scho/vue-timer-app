@@ -1,37 +1,36 @@
 const LocalStorageKey = {
-    storedDarkModeSetting: 'vue-timer-app_isDarkmodeEnabled',
-    storedTextareaContent: 'vue-timer-app_textareaContent',
-    storedTimers: 'vue-timer-app_storedTimers',
+    storedIsDarkmodeEnabled: 'vue-timer-app_isDarkmodeEnabled',
+    storedNotes: 'vue-timer-app_notes',
+    storedTimers: 'vue-timer-app_timers',
 } as const;
 
 // darkmode handling
-export function getStoredDarkmodeSetting() {
-    const storage = localStorage.getItem(LocalStorageKey.storedDarkModeSetting);
-	console.log(storage);
+export function getStoredIsDarkmodeEnabled() {
+    const storage = localStorage.getItem(LocalStorageKey.storedIsDarkmodeEnabled);
     if (storage) {
-        return JSON.parse(storage);
+        return (JSON.parse(storage) as boolean);
     } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setStoredDarkmodeSetting(true);
+        setStoredIsDarkmodeEnabled(true);
         return true;
     } else {
       return false;
     }
 };
-export function setStoredDarkmodeSetting(value: boolean) {
-    localStorage.setItem(LocalStorageKey.storedDarkModeSetting, String(value));
+export function setStoredIsDarkmodeEnabled(value: boolean) {
+    localStorage.setItem(LocalStorageKey.storedIsDarkmodeEnabled, String(value));
 }
 
 // textarea content handling
-export function getStoredTextareaContent() {
-    const storage = localStorage.getItem(LocalStorageKey.storedTextareaContent);
+export function getStoredNotes() {
+    const storage = localStorage.getItem(LocalStorageKey.storedNotes);
     if (storage) {
       return storage;
     } else {
       return '';
     }
 };
-export function setStoredTextareaContent(value: string) {
-    localStorage.setItem(LocalStorageKey.storedTextareaContent, value);
+export function setStoredNotes(value: string) {
+    localStorage.setItem(LocalStorageKey.storedNotes, value);
 };
 
 // timers handling
