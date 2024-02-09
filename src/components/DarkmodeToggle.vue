@@ -22,56 +22,45 @@ async function toggleDarkmode() {
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .mode-toggle {
+    border-color: var(--darkmode-toggle_primary-color);
+    background-color: var(--darkmode-toggle_primary-color);
     width: 50px;
     height: 28px;
     position: relative;
-    border-color: $darkmode-toggle_secondary-color;
-    background-color: $darkmode-toggle_primary-color;
     border-width: 1px;
+    border-style: solid;
+
     border-radius: 100px;
     cursor: pointer;
     user-select: none;
     box-sizing: content-box;
-}
-.mode-toggle-switch {
-    width: 22px;
-    height: 22px;
-    border-radius: 100px;
-    background-color: $darkmode-toggle_secondary-color;
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    transition: all 128ms ease-in-out;
-    display: grid;
-    place-items: center;
 
-    & > svg {
-        color: $darkmode-toggle_primary-color;
+    .mode-toggle-switch {
+        background-color: var(--darkmode-toggle_secondary-color);
+        transform: var(--darkmode-toggle_transform);
+        width: 22px;
+        height: 22px;
+        border-radius: 100px;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        transition: all 128ms ease-in-out;
+        display: grid;
+        place-items: center;
 
-        &.sun {
-            height: 17px;
-        }
+        & > svg {
+            color: var(--darkmode-toggle_primary-color);
 
-        &.moon {
-            height: 15px;
+            &.sun {
+                height: 17px;
+            }
+
+            &.moon {
+                height: 15px;
+            }
         }
     }
 }
-
-.mode-toggle-switch {
-  transform: $darkmode-toggle_transform;
-}
-.darkmode .mode-toggle {
-  border: 1px solid black;
-  background-color: white;
-}
-.darkmode .mode-toggle-switch {
-  background-color: black;
-}
-.darkmode .mode-toggle-switch > svg {
-  color: white;
-}
-
 </style>

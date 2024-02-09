@@ -16,17 +16,17 @@ const notes = ref(getStoredNotes());
 	></textarea>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
   textarea {
 	width: 100%;
 	border-radius: 10px;
 	padding: 6px 10px;
 	resize: none;
-	color: $textarea_color;
-	background-color: $textarea_bg-color;
+	color: var(--textarea_color);
+	background-color: var(--textarea_bg-color);
 
 	&::placeholder {
-		color: $textarea_placeholder-color;
+		color: var(--textarea_placeholder-color);
 	}
   }
 </style>

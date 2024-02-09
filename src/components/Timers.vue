@@ -162,7 +162,7 @@ function resetName(timer: Timer) {
 	</div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .timers-wrapper {
     display: inline-flex;
     align-items: center;
@@ -204,8 +204,8 @@ button {
 	border-radius: 5px;
 	font-weight: bold;
 	user-select: none;
-	color: $button_color;
-	background-color: $button_bg-color;
+	color: var(--button_color);
+	background-color: var(--button_bg-color);
 
     &:disabled {
         cursor: not-allowed;

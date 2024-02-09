@@ -1,4 +1,5 @@
-import '@/scss/resets.scss';
+import '@/styles/resets.css';
+import '@/styles/themes.css';
 
 import { createApp } from 'vue'
 import App from './App.vue'

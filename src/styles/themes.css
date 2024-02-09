@@ -1,0 +1,37 @@
+:root {
+	--bg-color: white;
+
+	--darkmode-toggle_primary-color: black;
+	--darkmode-toggle_secondary-color: white;
+	--darkmode-toggle_transform: translateX(0%);
+
+	--textarea_color: black;
+	--textarea_bg-color: white;
+	--textarea_placeholder-color: default;
+
+	--button_color: black;
+	--button_bg-color: white;
+	--button_disabled-color: white;
+	--button_disabled-bg-color: black;
+}
+
+.darkmode {
+	--bg-color: rgb(80, 80, 80);
+	
+	--darkmode-toggle_primary-color: white;
+	--darkmode-toggle_secondary-color: black;
+	--darkmode-toggle_transform: translateX(100%);
+
+	--textarea_color: white;
+	--textarea_bg-color: black;
+	--textarea_placeholder-color: rgb(158, 158, 158);
+
+	--button_color: white;
+	--button_bg-color: black;
+	--button_disabled-color: rgba(114, 114, 114, 0.5);
+	--button_disabled-bg-color: rgb(252, 252, 252);
+}
+
+body {
+	background-color: var(--bg-color);
+}
