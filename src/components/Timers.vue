@@ -99,8 +99,7 @@ function resetName(timer: Timer) {
 
 <template>
 	<div class="timers">
-		<div v-for="timer in timers" class="wrapper">
-
+		<div v-for="timer in timers" class="timers-wrapper">
 			<button
                 class="edit-name"
                 @click="makeNameEditable(timer)"
@@ -162,3 +161,96 @@ function resetName(timer: Timer) {
 		</div>
 	</div>
 </template>
+
+<style lang="scss">
+.timers-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 15px;
+    border: 1px solid rgb(158, 158, 158);
+    border-radius: 10px;
+    background-color: rgba(120, 120, 120, 0.1);
+}
+.timers {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+input.text {
+	height: 34px;
+	padding-inline: 10px;
+	border-radius: 5px;
+	min-width: 150px;
+	font-weight: bold;
+	color: black;
+	background-color: white;
+    flex-grow: 1;
+
+    &:read-only {
+        color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(230, 230, 230, 0.7);
+        cursor: not-allowed;
+    }
+}
+
+button {
+	height: 40px;
+	width: 100px;
+	padding-inline: 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-weight: bold;
+	user-select: none;
+	color: $button_color;
+	background-color: $button_bg-color;
+
+    &:disabled {
+        cursor: not-allowed;
+        color: rgba(114, 114, 114, 0.5);
+        background-color: rgb(252, 252, 252);
+    }
+
+    &.edit-name {
+        border-color:rgb(15, 92, 0);
+	    box-shadow: 0px 2px 1px 0 rgb(26, 155, 0);
+
+        &:disabled {
+            border-color:rgb(15, 92, 0, 0.3);
+	        box-shadow: 0px 2px 1px 0 rgb(26, 155, 0, 0.3);
+        }
+    }
+
+    &.reset-name,
+    &.timer-control-reset {
+        border-color:rgb(131, 0, 0);
+	    box-shadow: 0px 2px 1px 0 rgb(233, 0, 0);
+
+        &:disabled {
+            border-color:rgb(131, 0, 0, 0.3);
+	        box-shadow: 0px 2px 1px 0 rgb(233, 0, 0, 0.3);
+        }
+    }
+
+    &.timer-control {
+        border-color:rgb(23, 96, 255);
+	    box-shadow: 0px 2px 1px 0 rgb(23, 201, 255);
+
+        &:disabled {
+            border-color: rgba(23, 96, 255, 0.3);
+	        box-shadow: 0px 2px 1px 0 rgba(23, 201, 255, 0.3);
+        }
+    }
+}
+
+span {
+	font-size: 20px;
+	font-weight: bold;
+	border: 2px solid black;
+	padding: 6px 12px;
+	border-radius: 5px;
+	background-color: white;
+}
+</style>

@@ -15,3 +15,18 @@ const notes = ref(getStoredNotes());
 		@focusout="setStoredNotes(notes)"
 	></textarea>
 </template>
+
+<style lang="scss">
+  textarea {
+	width: 100%;
+	border-radius: 10px;
+	padding: 6px 10px;
+	resize: none;
+	color: $textarea_color;
+	background-color: $textarea_bg-color;
+
+	&::placeholder {
+		color: $textarea_placeholder-color;
+	}
+  }
+</style>

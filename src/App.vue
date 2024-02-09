@@ -10,17 +10,20 @@ const { isDarkmodeEnabled } = useDarkmode();
 </script>
 
 <template>
-    <div :class="{ darkmode: isDarkmodeEnabled }" class="wrapping-wrapper">
-        <Timers />
-        <div class="add">
+    <div :class="{ 'darkmode': isDarkmodeEnabled }">
+        <div class="wrapper" >
+            <Timers />
             <NotesEditor />
-            <div class="info-bar">
-                <div class="day-and-cw-info">
-                    <DayOfYearDisplay />
-                    <CalendarWeekDisplay />
-                </div>
-                <DarkmodeToggle />
-            </div>
+            <DayOfYearDisplay />
+            <CalendarWeekDisplay />
+            <DarkmodeToggle />
         </div>
     </div>
 </template>
+
+<style lang="scss">
+  .wrapper {
+	padding: 10px;
+    background-color: $wrapper_bg-color;
+  }
+</style>
