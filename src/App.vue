@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
+import { useDarkmode } from '@/composables/useDarkmode';
 import NotesEditor from './components/NotesEditor.vue';
 import DarkmodeToggle from './components/DarkmodeToggle.vue';
 import DayOfYearDisplay from './components/DayOfYearDisplay.vue';
 import CalendarWeekDisplay from './components/CalendarWeekDisplay.vue';
 import Timers from './components/Timers.vue';
 
-import { getStoredIsDarkmodeEnabled } from './methods/localStorageHandling';
-
-const isDarkmodeEnabled = ref(getStoredIsDarkmodeEnabled());
+const { isDarkmodeEnabled } = useDarkmode();
 </script>
 
 <template>
@@ -22,7 +19,7 @@ const isDarkmodeEnabled = ref(getStoredIsDarkmodeEnabled());
                     <DayOfYearDisplay />
                     <CalendarWeekDisplay />
                 </div>
-                <DarkmodeToggle v-model="isDarkmodeEnabled" />
+                <DarkmodeToggle />
             </div>
         </div>
     </div>

@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { defineModel, nextTick } from 'vue';
-import { setStoredIsDarkmodeEnabled } from '@/methods/localStorageHandling';
+import { useDarkmode } from '@/composables/useDarkmode';
 
-const isDarkmodeEnabled = defineModel({ type: Boolean, required: true, });
+const { isDarkmodeEnabled, setStoredIsDarkmodeEnabled } = useDarkmode();
 
 async function toggleDarkmode() {
     isDarkmodeEnabled.value = !isDarkmodeEnabled.value;
-	await nextTick(); 
     setStoredIsDarkmodeEnabled(isDarkmodeEnabled.value);
 };
 </script>
