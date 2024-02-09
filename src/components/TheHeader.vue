@@ -22,7 +22,7 @@ header {
 	gap: 2rem;
 	margin-bottom: 2px;
 	box-shadow: 0px 0px 5px gray;
-	padding: 1rem 2rem;
+	padding: 1rem 7rem;
 
 	.header-info {
 		display: flex;

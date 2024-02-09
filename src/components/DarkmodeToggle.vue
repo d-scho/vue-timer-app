@@ -3,7 +3,7 @@ import { useDarkmode } from '@/composables/useDarkmode';
 
 const { isDarkmodeEnabled, setStoredIsDarkmodeEnabled } = useDarkmode();
 
-async function toggleDarkmode() {
+function toggleDarkmode() {
     isDarkmodeEnabled.value = !isDarkmodeEnabled.value;
     setStoredIsDarkmodeEnabled(isDarkmodeEnabled.value);
 };

@@ -99,7 +99,7 @@ function resetName(timer: Timer) {
 
 <template>
 	<div class="timers">
-		<div v-for="timer in timers" class="timers-wrapper">
+		<div v-for="timer in timers" class="timer">
 			<button
                 class="edit-name"
                 @click="makeNameEditable(timer)"
@@ -156,22 +156,24 @@ function resetName(timer: Timer) {
 			<span>{{ timer.display }}</span>
 
 		</div>
-		<div class="wrapper flex-end-1250-center">
+		<div class="timer">
 			<span>{{ timerSum }}</span>
 		</div>
 	</div>
 </template>
 
 <style scoped lang="scss">
-.timers-wrapper {
+.timer {
     display: inline-flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 15px;
     padding: 10px 15px;
     border: 1px solid rgb(158, 158, 158);
     border-radius: 10px;
     background-color: rgba(120, 120, 120, 0.1);
 }
+
 .timers {
 	display: flex;
 	flex-direction: column;
@@ -184,13 +186,13 @@ input.text {
 	border-radius: 5px;
 	min-width: 150px;
 	font-weight: bold;
-	color: black;
-	background-color: white;
+	color: var(--input_color);
+	background-color: var(--input_bg-color);
     flex-grow: 1;
 
     &:read-only {
-        color: rgba(0, 0, 0, 0.7);
-        background-color: rgba(230, 230, 230, 0.7);
+        color: var(--input_read-only-color);
+        background-color: var(--input_read-only-bg-color);
         cursor: not-allowed;
     }
 }
@@ -209,8 +211,9 @@ button {
 
     &:disabled {
         cursor: not-allowed;
-        color: rgba(114, 114, 114, 0.5);
-        background-color: rgb(252, 252, 252);
+        color: var(--button_disabled-color);
+        background-color: var(--button_disabled-bg-color);
+
     }
 
     &.edit-name {
@@ -222,6 +225,7 @@ button {
 	        box-shadow: 0px 2px 1px 0 rgb(26, 155, 0, 0.3);
         }
     }
+    
 
     &.reset-name,
     &.timer-control-reset {
@@ -251,6 +255,7 @@ span {
 	border: 2px solid black;
 	padding: 6px 12px;
 	border-radius: 5px;
-	background-color: white;
+	color: var(--counter-display_color);
+	background-color: var(--counter-display_bg-color);
 }
 </style>

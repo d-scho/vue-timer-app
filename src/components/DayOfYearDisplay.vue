@@ -11,3 +11,9 @@ const dayOfYear = ref(getDayOfYear());
 <template>
 	<div>{{ dayOfYear }}<sup>{{ getCountingNumberSuffix(dayOfYear) }}</sup> {{ Labels.DAY_OF_THE_YEAR.toLowerCase() }}</div>
 </template>
+
+<style scoped lang="scss">
+div {
+	color: var(--textarea_color);
+}
+</style>

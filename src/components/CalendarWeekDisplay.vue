@@ -10,3 +10,9 @@ const calendarWeek = ref(getCalendarWeek());
 <template>
 	<div>{{ Labels.CURRENT_CALENDAR_WEEK }}: {{ calendarWeek }}</div>
 </template>
+
+<style scoped lang="scss">
+div {
+	color: var(--textarea_color);
+}
+</style>

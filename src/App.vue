@@ -12,8 +12,11 @@ import Timers from '@/components/Timers.vue';
     </div>
 </template>
 
-<style lang="scss">
-  .wrapper {
-	padding: 10px;
-  }
+<style scoped lang="scss">
+.wrapper {
+    padding: 1rem 6rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 </style>
