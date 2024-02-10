@@ -14,6 +14,6 @@ const dayOfYear = ref(getDayOfYear());
 
 <style scoped lang="scss">
 div {
-	color: var(--textarea_color);
+	color: var(--primary-color);
 }
 </style>

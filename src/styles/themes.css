@@ -1,53 +1,30 @@
 :root {
-	--bg-color: white;
+	--primary-color: black;
+	--secondary-color: white;
+	--tertiary-color: #a9a9a9;
+	--quarternary-color: rgb(255, 253, 247);
 
-	--darkmode-toggle_primary-color: black;
-	--darkmode-toggle_secondary-color: white;
-	--darkmode-toggle_transform: translateX(0%);
-
-	--textarea_color: black;
-	--textarea_bg-color: white;
-	--textarea_placeholder-color: default;
-
-	--button_color: black;
-	--button_bg-color: white;
 	--button_disabled-color: rgba(114, 114, 114, 0.5);
 	--button_disabled-bg-color: rgb(252, 252, 252);
 
-	--input_color: black;
-	--input_bg-color: white;
 	--input_read-only-color: rgba(0, 0, 0, 0.7);
 	--input_read-only-bg-color: rgba(230, 230, 230, 0.7);
 
-	--counter-display_color: black;
-	--counter-display_bg-color: white;
 }
 
 .darkmode {
-	--bg-color: rgb(22, 22, 22);;
-	
-	--darkmode-toggle_primary-color: white;
-	--darkmode-toggle_secondary-color: black;
-	--darkmode-toggle_transform: translateX(100%);
+	--primary-color: rgb(230, 230, 230);
+	--secondary-color: rgb(31, 31, 31);
+	--tertiary-color: rgb(158, 158, 158);
+	--quarternary-color: rgb(37, 37, 37);
 
-	--textarea_color: white;
-	--textarea_bg-color: black;
-	--textarea_placeholder-color: rgb(158, 158, 158);
-
-	--button_color: white;
-	--button_bg-color: black;
 	--button_disabled-color: rgb(165, 165, 165);
 	--button_disabled-bg-color: rgba(34, 34, 34, 0.5);
 
-	--input_color: white;
-	--input_bg-color: black;
 	--input_read-only-color: rgb(207, 207, 207);
 	--input_read-only-bg-color: rgb(41, 41, 41);
-
-	--counter-display_color: white;
-	--counter-display_bg-color: black;
 }
 
 body {
-	background-color: var(--bg-color);
+	background-color: var(--quarternary-color);
 }

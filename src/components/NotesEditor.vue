@@ -22,11 +22,11 @@ const notes = ref(getStoredNotes());
 	border-radius: 10px;
 	padding: 6px 10px;
 	resize: none;
-	color: var(--textarea_color);
-	background-color: var(--textarea_bg-color);
+	color: var(--primary-color);
+	background-color: var(--secondary-color);
 
 	&::placeholder {
-		color: var(--textarea_placeholder-color);
+		color: var(--tertiary-color);
 	}
   }
 </style>

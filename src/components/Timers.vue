@@ -179,8 +179,8 @@ function resetName(timer: Timer) {
                 min-width: 150px;
                 width: 100%;
                 font-weight: bold;
-                color: var(--input_color);
-                background-color: var(--input_bg-color);
+                color: var(--primary-color);
+                background-color: var(--secondary-color);
                 flex-grow: 1;
             }
 
@@ -195,14 +195,14 @@ function resetName(timer: Timer) {
                 border: 1px solid rgb(131, 0, 0);
                 box-shadow: 0px 2px 1px 0 rgb(233, 0, 0);
                 border-radius: 5px;
-                background-color: white;
+                background-color: var(--secondary-color);
 
                 & > svg {
                     height: 14px;
                     width: 14px;
                     display: block;
                     margin: 0 auto;
-                    fill: black;;
+                    fill: var(--primary-color);;;
                 }
             }
         }
@@ -214,8 +214,8 @@ function resetName(timer: Timer) {
             border-radius: 5px;
             font-weight: bold;
             user-select: none;
-            color: var(--button_color);
-            background-color: var(--button_bg-color);
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
             cursor: pointer;
 
             &:disabled {
@@ -252,8 +252,8 @@ function resetName(timer: Timer) {
             border: 2px solid black;
             padding: 6px 12px;
             border-radius: 5px;
-            color: var(--counter-display_color);
-            background-color: var(--counter-display_bg-color);
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
         }
     }
 }

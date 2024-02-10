@@ -23,9 +23,15 @@ function toggleDarkmode() {
 </template>
 
 <style scoped lang="scss">
+.darkmode .mode-toggle {
+    .mode-toggle-switch {
+        transform: translateX(100%);
+    }
+}
+
 .mode-toggle {
-    border-color: var(--darkmode-toggle_primary-color);
-    background-color: var(--darkmode-toggle_primary-color);
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
     width: 50px;
     height: 28px;
     position: relative;
@@ -38,7 +44,7 @@ function toggleDarkmode() {
     box-sizing: content-box;
 
     .mode-toggle-switch {
-        background-color: var(--darkmode-toggle_secondary-color);
+        background-color: var(--secondary-color);
         transform: var(--darkmode-toggle_transform);
         width: 22px;
         height: 22px;
@@ -51,7 +57,7 @@ function toggleDarkmode() {
         place-items: center;
 
         & > svg {
-            color: var(--darkmode-toggle_primary-color);
+            color: var(--primary-color);
 
             &.sun {
                 height: 17px;

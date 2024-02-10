@@ -13,6 +13,6 @@ const calendarWeek = ref(getCalendarWeek());
 
 <style scoped lang="scss">
 div {
-	color: var(--textarea_color);
+	color: var(--primary-color);
 }
 </style>
