@@ -1,11 +1,11 @@
 :root {
 	--text-color: #030303;
-	--text-color-off: #7e7e7e;
+	--text-color-off: #b8b8b8;
 
 	--element-bg-color: #ffffff;
-	--element-bg-color-off: #eeeeee;
+	--element-bg-color-off: #dfdede;
 
-	--bg-color: #fdfcfa;
+	--bg-color: #ffffff;
 }
 
 .darkmode {
@@ -13,7 +13,7 @@
 	--text-color-off: #8a8a8a;
 
 	--element-bg-color: #121212;
-	--element-bg-color-off: #1f1f1f;
+	--element-bg-color-off: #2c2c2c;
 
 	--bg-color: #222222;
 }
