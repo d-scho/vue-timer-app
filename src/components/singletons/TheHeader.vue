@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import TheDarkmodeToggle from '@/components/singletons/TheDarkmodeToggle.vue';
-import TheNotesToggle from '@/components/singletons/TheNotesToggle.vue';
-import DayOfYearDisplay from '@/components/DayOfYearDisplay.vue';
-import CalendarWeekDisplay from '@/components/CalendarWeekDisplay.vue';
-import TimerSumDisplay from '@/components/TimerSumDisplay.vue';
+import TimersAdder from '@/components/TimersAdder.vue';
+import DarkmodeToggle from '@/components/DarkmodeToggle.vue';
+import NotesToggle from '@/components/NotesToggle.vue';
+import DisplayDayOfYear from '@/components/DisplayDayOfYear.vue';
+import DisplayCalendarWeek from '@/components/DisplayCalendarWeek.vue';
+import TimersSum from '@/components/TimersSum.vue';
 </script>
 
 <template>
 	<header>
 		<div class="header-info">
-			<DayOfYearDisplay /> | <CalendarWeekDisplay /> | <TimerSumDisplay />
+			<DisplayDayOfYear /> | <DisplayCalendarWeek /> | <TimersSum />
         </div>
 		<div class="header-settings">
-			<TheNotesToggle />
-			<TheDarkmodeToggle />
+			<TimersAdder />
+			<NotesToggle />
+			<DarkmodeToggle />
 		</div>
 	</header>
 </template>
@@ -29,21 +31,21 @@ header {
 	position: fixed;
 	width: 100%;
 	height: var(--header-height);
-	background-color: var(--secondary-color);
+	background-color: var(--bg-color);
 	z-index: 200;
 
 	.header-info {
 		display: flex;
 		place-items: center;
-		gap: 2rem;
-		color: var(--primary-color);
+		gap: 1rem;
+		color: var(--text-color);
 	}
 
 	.header-settings {
 		display: flex;
 		place-items: center;
-		gap: 2rem;
-		color: var(--primary-color);
+		gap: 1rem;
+		color: var(--text-color);
 	}
 }
 </style>

@@ -1,9 +1,10 @@
-import { ref } from 'vue';
+import { ref, nextTick } from 'vue';
 
 const isShowNotes = ref(false);
 
-function toggleShowNotes() {
+async function toggleShowNotes() {
 	isShowNotes.value = !isShowNotes.value;
+	await nextTick();
 }
 
 export function useNotesToggle() {

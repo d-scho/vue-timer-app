@@ -46,8 +46,7 @@ export function getStoredTimers(): Array<Timer> {
         name: timerDTO.name,
         value: timerDTO.value,
         display: convertMillisecondsToReadableFormat(timerDTO.value),
-        startTimerDisabled: false,
-        stopTimerDisabled: true,
+        isRunning: false,
         resetTimerDisabled: timerDTO.value !== 0 ? false : true,
       }));
     } else {

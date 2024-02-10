@@ -17,7 +17,6 @@ const { isShowNotes } = useNotesToggle();
 
 <style scoped lang="scss">
 .wrapper {
-    position: relative;
     padding: 1rem 6rem;
     display: flex;
     flex-direction: column;

@@ -1,88 +1,28 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { type Timer } from '@/types/Timer';
 
 import GenericButton from './generics/GenericButton.vue';
 
 import { useLabels } from '@/composables/useLabels';
-import { useTimerSum } from '@/composables/useTimerSum';
-
-import convertMillisecondsToReadableFormat from '@/methods/convertMillisecondsToReadableFormat';
-import { buildTimers, createNewTimer } from '@/methods/timerCreation';
-import { setStoredTimers } from '@/methods/localStorageHandling';
+import { useTimers } from '@/composables/useTimers';
 
 const { Labels } = useLabels();
+const {
+    removeTimer,
+    startTimer,
+    stopTimer,
+    resetTimer,
+    confirmNameChange,
+    resetName,
+    timers,
 
-const timers = buildTimers();
-const { declareTimers } = useTimerSum();
-declareTimers(timers);
+ } = useTimers();
 
-// template ref
 const timerRefs = ref<Array<HTMLElement>|null>(null);
-
-function addTimer() {
-    timers.value.push(createNewTimer());
-    setStoredTimers(timers.value);
-}
-
-function removeTimer(timer: Timer) {
-    const index = timers.value.indexOf(timer);
-    if (index !== -1) {
-        timers.value.splice(index, 1);
-        setStoredTimers(timers.value);
-    }
-}
-
-function startTimer(timer: Timer) {
-    timer.value += 1; // instantly add one one millisecond to trigger depending renderers, will be overwritten by correct value once interval triggers
-    timer.startTimerDisabled = true;
-    timer.stopTimerDisabled = false;
-    timer.resetTimerDisabled = false;
-    let storedValue = timer.value;
-    let startingTime = Number(new Date());
-    timer.interval = setInterval(() => {
-        timer.value = Number(new Date()) - startingTime + storedValue;
-        timer.display = convertMillisecondsToReadableFormat(timer.value);
-        setStoredTimers(timers.value);
-    }, 250);
-};
-
-function stopTimer(timer: Timer) {
-    timer.startTimerDisabled = false;
-    timer.stopTimerDisabled = true;
-    clearInterval(timer.interval);
-    timer.interval = undefined;
-    setStoredTimers(timers.value);
-};
-
-function resetTimer(timer: Timer) {
-    timer.startTimerDisabled = false;
-    timer.stopTimerDisabled = true;
-    timer.resetTimerDisabled = true;
-    clearInterval(timer.interval);
-    timer.interval = undefined;
-    timer.value = 0;
-    timer.display = convertMillisecondsToReadableFormat(timer.value);
-    setStoredTimers(timers.value);
-};
-
-function confirmNameChange(timer: Timer) {
-    if (timerRefs.value) (timerRefs.value as HTMLElement[]).find(el => el.id === String(timer.id))?.blur();
-    setStoredTimers(timers.value);
-};
-
-function resetName(timer: Timer) {
-    timer.name  = '';
-    setStoredTimers(timers.value);
-};
 </script>
 
 <template>
-    <GenericButton height="50px" @click="addTimer">
-        {{ Labels.ADD_TIMER }}
-    </GenericButton>
-
-    <TransitionGroup name="fade" tag="ul" class="timers">
+    <TransitionGroup name="slide" tag="ul" class="timers">
         <li v-for="timer in timers" class="timer-row" :key="timer.id">
             <div class="timer">
                 <div class="timer-name-wrapper">
@@ -92,8 +32,8 @@ function resetName(timer: Timer) {
                         ref="timerRefs"
                         :id="String(timer.id)"
                         v-model.lazy="timer.name"
-                        @keydown.enter="confirmNameChange(timer)"
-                        @focusout="confirmNameChange(timer)"
+                        @keydown.enter="confirmNameChange(timerRefs, timer)"
+                        @focusout="confirmNameChange(timerRefs, timer)"
                         placeholder="Issue / topic"
                     >
                     <button
@@ -112,31 +52,43 @@ function resetName(timer: Timer) {
                         </svg>
                     </button>
                 </div>
-                <button
-                    class="btn timer-control"
+                <GenericButton
+                    v-if="!timer.isRunning"
                     @click="startTimer(timer)"
-                    :disabled="timer.startTimerDisabled"
+                    height="40px"
                 >
-                    {{ timer.value > 0 ? Labels.RESUME_TIMER : Labels.START_TIMER }}
-                </button>
-                <button
-                    class="btn timer-control"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="-4 -4 28 28"><path d="M3 22v-20l18 10-18 10z"/></svg>
+                </GenericButton>
+                <GenericButton
+                    v-if="timer.isRunning"
                     @click="stopTimer(timer)"
-                    :disabled="timer.stopTimerDisabled"
+                    height="40px"
                 >
-                    {{ Labels.STOP_TIMER }}
-                </button>
-                <button
-                    class="btn timer-control-reset"
+                    <svg width="22" height="22" viewBox="-16 -32 528 528" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M120.16 45A20.162 20.162 0 0 0 100 65.16v381.68A20.162 20.162 0 0 0 120.16 467h65.68A20.162 20.162 0 0 0 206 446.84V65.16A20.162 20.162 0 0 0 185.84 45h-65.68zm206 0A20.162 20.162 0 0 0 306 65.16v381.68A20.162 20.162 0 0 0 326.16 467h65.68A20.162 20.162 0 0 0 412 446.84V65.16A20.162 20.162 0 0 0 391.84 45h-65.68z"/>
+                    </svg>
+                </GenericButton>
+                <GenericButton
                     @click="resetTimer(timer)"
                     :disabled="timer.resetTimerDisabled"
+                    height="40px"
                 >
-                    {{ Labels.RESET_TIMER }}
-                </button>
-                <span>{{ timer.display }}</span>
+                    <svg width="22" height="22" viewBox="-250 -220 2160 2160" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M960 0v213.333c411.627 0 746.667 334.934 746.667 746.667S1371.627 1706.667 960 1706.667 213.333 1371.733 213.333 960c0-197.013 78.4-382.507 213.334-520.747v254.08H640V106.667H53.333V320h191.04C88.64 494.08 0 720.96 0 960c0 529.28 430.613 960 960 960s960-430.72 960-960S1489.387 0 960 0" fill-rule="evenodd"/>
+                    </svg>
+                </GenericButton>
+                <span class="display">{{ timer.display }}</span>
             </div>
 
-            <GenericButton height="50px" @click="removeTimer(timer)">{{ Labels.REMOVE_TIMER }}</GenericButton>
+            <GenericButton height="40px" @click="removeTimer(timer)">
+                <svg width="30" height="30" viewBox="-4 -5 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 11V17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 11V17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 7H20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </GenericButton>
         </li>
     </TransitionGroup>
 </template>
@@ -176,9 +128,13 @@ function resetName(timer: Timer) {
                     min-width: 150px;
                     width: 100%;
                     font-weight: bold;
-                    color: var(--primary-color);
-                    background-color: var(--secondary-color);
+                    color: var(--text-color);
+                    background-color: var(--element-bg-color);
                     flex-grow: 1;
+
+                    &::placeholder {
+                        color: var(--text-color-off);
+                    }
                 }
 
                 button.timer-reset-name {
@@ -189,90 +145,51 @@ function resetName(timer: Timer) {
                     position: absolute;
                     top: -1px;
                     right: 0;
-                    border: 1px solid rgb(131, 0, 0);
-                    box-shadow: 0px 2px 1px 0 rgb(233, 0, 0);
                     border-radius: 5px;
-                    background-color: var(--secondary-color);
+                    background-color: var(--element-bg-color);
 
                     & > svg {
                         height: 14px;
                         width: 14px;
                         display: block;
                         margin: 0 auto;
-                        fill: var(--primary-color);;;
+                        fill: var(--text-color);;;
                     }
                 }
             }
 
-            button.btn {
-                margin-bottom: 1px; // slighty crank position because of shadows
-                height: 40px;
-                width: 100px;
-                padding-inline: 20px;
-                border-radius: 5px;
-                font-weight: bold;
-                user-select: none;
-                color: var(--primary-color);
-                background-color: var(--secondary-color);
-                cursor: pointer;
-
-                &:disabled {
-                    cursor: not-allowed;
-                    color: var(--button_disabled-color);
-                    background-color: var(--button_disabled-bg-color);
-                }
-
-                &.timer-control {
-                    border-color:rgb(23, 96, 255);
-                    box-shadow: 0px 2px 1px 0 rgb(23, 201, 255);
-
-                    &:disabled {
-                        border-color: rgba(23, 96, 255, 0.3);
-                        box-shadow: 0px 2px 1px 0 rgba(23, 201, 255, 0.3);
-                    }
-                }
-
-                &.reset-name,
-                &.timer-control-reset {
-                    border-color:rgb(131, 0, 0);
-                    box-shadow: 0px 2px 1px 0 rgb(233, 0, 0);
-
-                    &:disabled {
-                        border-color:rgb(131, 0, 0, 0.3);
-                        box-shadow: 0px 2px 1px 0 rgb(233, 0, 0, 0.3);
-                    }
-                }
-            }
-
-            span {
+            span.display {
                 font-size: 20px;
                 font-weight: bold;
+                height: 39px;
+                width: 110px;
+                text-align: center;
                 border: 2px solid black;
                 padding: 6px 12px;
                 border-radius: 5px;
-                color: var(--primary-color);
-                background-color: var(--secondary-color);
+                color: var(--text-color);
+                background-color: var(--element-bg-color);
             }
         }
     }
 }
 
-.fade-move,
-.fade-enter-active,
-.fade-leave-active {
+.slide-move,
+.slide-enter-active,
+.slide-leave-active {
     transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
-.fade-enter-from {
+.slide-enter-from {
     opacity: 0;
     transform: scaleY(0) translateY(-70px);
 }
-.fade-leave-to {
+.slide-leave-to {
     opacity: 0;
     transform: scaleY(0) translateY(70px);
 }
 
-.fade-leave-active {
+.slide-leave-active {
     margin-block: calc((70px + 0.8rem) * -1); // you are supposed to set position: absolute here, but that didn't work
 }
 </style>

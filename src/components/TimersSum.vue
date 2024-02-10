@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useTimerSum } from '@/composables/useTimerSum';
+import { useTimers } from '@/composables/useTimers';
 
-const { timerSum } = useTimerSum();
+const { timerSum } = useTimers();
 </script>
 
 <template>
@@ -10,6 +10,6 @@ const { timerSum } = useTimerSum();
 
 <style scoped lang="scss">
 span {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 </style>

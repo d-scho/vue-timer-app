@@ -4,8 +4,7 @@ export type Timer = {
 	value: number;
 	display: string;
 	interval?: number;
-	startTimerDisabled: boolean;
-	stopTimerDisabled: boolean;
+	isRunning: boolean;
 	resetTimerDisabled: boolean;
 };
 

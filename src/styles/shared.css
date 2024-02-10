@@ -2,6 +2,10 @@
 	--header-height: 62px;
 }
 
+body {
+	background-color: var(--bg-color);
+}
+
 body, #app {
 	min-height: 100vh;
 }

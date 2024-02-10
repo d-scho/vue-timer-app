@@ -3,17 +3,17 @@ const emit = defineEmits<{
   	(e: 'click'): void
 }>();
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
 	width?: `${string}px`;
 	height?: `${string}px`;
 }>(), {
-	width: '100px',
-	height: '30px',
+	width: '50px',
+	height: '40px',
 });
 </script>
 
 <template>
-	<button @click="emit('click')"><slot /></button>
+	<button @click="emit('click')"><slot></slot></button>
 </template>
 
 <style scoped lang="scss">
@@ -23,7 +23,15 @@ button {
 	border-radius: 5px;
 	cursor: pointer;
 	font-weight: bold;
-	color: var(--primary-color);
-	background-color: var(--secondary-color);
+	color: var(--text-color);
+	fill: var(--text-color);
+	stroke: var(--text-color);
+	background-color: var(--element-bg-color);
+
+	&:disabled {
+		cursor: not-allowed;
+		color: var(--text-color-off);
+		background-color: var(--element-bg-color-off);
+	}
 }
 </style>
