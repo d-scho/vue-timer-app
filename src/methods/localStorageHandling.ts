@@ -1,4 +1,5 @@
-import { type TimerDTO } from '../types/Timer';
+import type { Timer, TimerDTO } from '../types/Timer';
+import convertMillisecondsToReadableFormat from '@/methods/convertMillisecondsToReadableFormat';
 
 const LocalStorageKey = {
     storedIsDarkmodeEnabled: 'vue-timer-app_isDarkmodeEnabled',
@@ -36,14 +37,23 @@ export function setStoredNotes(value: string) {
 };
 
 // timers handling
-export function getStoredTimers(): Array<TimerDTO> {
+export function getStoredTimers(): Array<Timer> {
     const storage = localStorage.getItem(LocalStorageKey.storedTimers);
     if (storage) {
-      return JSON.parse(storage);
+      const timerDTOs = JSON.parse(storage) as Array<TimerDTO>;
+      return timerDTOs.map(timerDTO => ({
+        id: timerDTO.id,
+        name: timerDTO.name,
+        value: timerDTO.value,
+        display: convertMillisecondsToReadableFormat(timerDTO.value),
+        startTimerDisabled: false,
+        stopTimerDisabled: true,
+        resetTimerDisabled: timerDTO.value !== 0 ? false : true,
+      }));
     } else {
       return [];
     }
 };
-export function setStoredTimers(value: Array<TimerDTO>) {
-    localStorage.setItem(LocalStorageKey.storedTimers, JSON.stringify(value));
+export function setStoredTimers(value: Array<Timer>) {
+    localStorage.setItem(LocalStorageKey.storedTimers, JSON.stringify(value.map(timer => ({ id: timer.id, name: timer.name, value: timer.value } as TimerDTO))));
 };

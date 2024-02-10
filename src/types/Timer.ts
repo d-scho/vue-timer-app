@@ -1,10 +1,9 @@
 export type Timer = {
-	id: number;
+	id: string;
 	name: string;
 	value: number;
 	display: string;
 	interval?: number;
-	nameChangeDisabled: boolean;
 	startTimerDisabled: boolean;
 	stopTimerDisabled: boolean;
 	resetTimerDisabled: boolean;

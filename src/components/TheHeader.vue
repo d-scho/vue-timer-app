@@ -2,13 +2,14 @@
 import DarkmodeToggle from '@/components/DarkmodeToggle.vue';
 import DayOfYearDisplay from '@/components/DayOfYearDisplay.vue';
 import CalendarWeekDisplay from '@/components/CalendarWeekDisplay.vue';
+import TimerSumDisplay from '@/components/TimerSumDisplay.vue';
 </script>
 
 <template>
 	<header>
 		<div class="header-info">
-			<DayOfYearDisplay /> | <CalendarWeekDisplay />
-		</div>
+			<DayOfYearDisplay /> | <CalendarWeekDisplay /> | <TimerSumDisplay />
+        </div>
 		<div class="header-settings">
 			<DarkmodeToggle />
 		</div>
@@ -28,6 +29,7 @@ header {
 		display: flex;
 		place-items: center;
 		gap: 2rem;
+		color: var(--primary-color);
 	}
 }
 </style>
