@@ -76,82 +76,81 @@ function resetName(timer: Timer) {
 </script>
 
 <template>
-	<div class="timers">
-        <TransitionGroup name="timers">
-            <div v-for="timer in timers" class="timer-row" :key="timer.id">
-                <div class="timer">
-                    <div class="timer-name-wrapper">
-                        <input
-                            class="timer-name"
-                            type="text"
-                            ref="timerRefs"
-                            :id="String(timer.id)"
-                            v-model.lazy="timer.name"
-                            @keydown.enter="confirmNameChange(timer)"
-                            @focusout="confirmNameChange(timer)"
-                            placeholder="Issue / topic"
-                        >
-                        <button
-                            v-if="timer.name.length > 0"
-                            class="timer-reset-name"
-                            @click="resetName(timer)"
-                            :disabled="timer.name.length === 0"
-                        >
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve">
-                                <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
-                                    c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
-                                    c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
-                                    c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
-                                    l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
-                                    c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <button
-                        class="btn timer-control"
-                        @click="startTimer(timer)"
-                        :disabled="timer.startTimerDisabled"
+    <div @click="addTimer">add timer</div>
+    <TransitionGroup name="fade" tag="ul" class="timers">
+        <li v-for="timer in timers" class="timer-row" :key="timer.id">
+            <div class="timer">
+                <div class="timer-name-wrapper">
+                    <input
+                        class="timer-name"
+                        type="text"
+                        ref="timerRefs"
+                        :id="String(timer.id)"
+                        v-model.lazy="timer.name"
+                        @keydown.enter="confirmNameChange(timer)"
+                        @focusout="confirmNameChange(timer)"
+                        placeholder="Issue / topic"
                     >
-                        {{ timer.value > 0 ? Labels.RESUME_TIMER : Labels.START_TIMER }}
-                    </button>
                     <button
-                        class="btn timer-control"
-                        @click="stopTimer(timer)"
-                        :disabled="timer.stopTimerDisabled"
+                        v-if="timer.name.length > 0"
+                        class="timer-reset-name"
+                        @click="resetName(timer)"
+                        :disabled="timer.name.length === 0"
                     >
-                        {{ Labels.STOP_TIMER }}
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve">
+                            <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+                                c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+                                c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+                                c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+                                l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+                                c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
+                        </svg>
                     </button>
-                    <button
-                        class="btn timer-control-reset"
-                        @click="resetTimer(timer)"
-                        :disabled="timer.resetTimerDisabled"
-                    >
-                        {{ Labels.RESET_TIMER }}
-                    </button>
-                    <span>{{ timer.display }}</span>
                 </div>
-                <div @click="removeTimer(timer)">
-                    remove timer
-                </div>
+                <button
+                    class="btn timer-control"
+                    @click="startTimer(timer)"
+                    :disabled="timer.startTimerDisabled"
+                >
+                    {{ timer.value > 0 ? Labels.RESUME_TIMER : Labels.START_TIMER }}
+                </button>
+                <button
+                    class="btn timer-control"
+                    @click="stopTimer(timer)"
+                    :disabled="timer.stopTimerDisabled"
+                >
+                    {{ Labels.STOP_TIMER }}
+                </button>
+                <button
+                    class="btn timer-control-reset"
+                    @click="resetTimer(timer)"
+                    :disabled="timer.resetTimerDisabled"
+                >
+                    {{ Labels.RESET_TIMER }}
+                </button>
+                <span>{{ timer.display }}</span>
             </div>
-        </TransitionGroup>
-        <div @click="addTimer">add timer</div>
-	</div>
+            <div @click="removeTimer(timer)">
+                remove timer
+            </div>
+        </li>
+    </TransitionGroup>
 </template>
 
 <style scoped lang="scss">
 .timers {
-	display: flex;
-	flex-direction: column;
-	gap: .8rem;
+    position: relative;
 
     .timer-row {
+        width: 100%;
+        margin-bottom: .8rem;
+        list-style-type: none;
         display: flex;
         align-items: center;
-        gap: .8rem;
+        height: 70px;
 
         .timer {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: flex-end;
             gap: .8rem;
@@ -253,18 +252,22 @@ function resetName(timer: Timer) {
     }
 }
 
-
-.timers-enter-active,
-.timers-leave-active {
-  transition: all 256ms ease;
-}
-.timers-enter-from {
-  opacity: 0;
-  transform: translateY(30px);
-}
-.timers-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
+.fade-enter-from {
+    opacity: 0;
+    transform: scaleY(0) translateY(-70px);
+}
+.fade-leave-to {
+    opacity: 0;
+    transform: scaleY(0) translateY(70px);
+}
+
+.fade-leave-active {
+    margin-block: calc((70px + 0.8rem) * -1); // you are supposed to set position: absolute here, but that didn't work
+}
 </style>

@@ -1,4 +1,5 @@
 import '@/styles/resets.css';
+import '@/styles/shared.css';
 import '@/styles/themes.css';
 
 import { createApp } from 'vue'

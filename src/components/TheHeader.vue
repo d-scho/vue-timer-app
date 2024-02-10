@@ -24,6 +24,10 @@ header {
 	margin-bottom: 2px;
 	box-shadow: 0px 0px 5px gray;
 	padding: 1rem 7rem;
+	position: fixed;
+	width: 100%;
+	height: var(--header-height);
+	background-color: var(--secondary-color);
 
 	.header-info {
 		display: flex;

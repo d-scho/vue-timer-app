@@ -18,5 +18,6 @@ import Timers from '@/components/Timers.vue';
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding-top: calc(var(--header-height) + 2rem);
 }
 </style>
