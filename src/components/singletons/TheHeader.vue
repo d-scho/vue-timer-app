@@ -34,18 +34,12 @@ header {
 	background-color: var(--bg-color);
 	z-index: 200;
 
-	.header-info {
+	& > * {
 		display: flex;
 		place-items: center;
 		gap: 1rem;
 		color: var(--text-color);
-	}
-
-	.header-settings {
-		display: flex;
-		place-items: center;
-		gap: 1rem;
-		color: var(--text-color);
+		flex-shrink: 0;
 	}
 }
 </style>
