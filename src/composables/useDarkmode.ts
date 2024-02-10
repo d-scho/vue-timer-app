@@ -6,7 +6,7 @@ const body = document.querySelector('body');
 isDarkmodeEnabled.value ? body?.classList.add('darkmode') : body?.classList.remove('darkmode');
 watch(isDarkmodeEnabled, (value) => {
 	value ? body?.classList.add('darkmode') : body?.classList.remove('darkmode');
-})
+});
 
 export function useDarkmode() {
 	return {
