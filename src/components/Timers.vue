@@ -3,10 +3,8 @@ import { ref } from 'vue';
 
 import GenericButton from './generics/GenericButton.vue';
 
-import { useLabels } from '@/composables/useLabels';
 import { useTimers } from '@/composables/useTimers';
 
-const { Labels } = useLabels();
 const {
     removeTimer,
     startTimer,
