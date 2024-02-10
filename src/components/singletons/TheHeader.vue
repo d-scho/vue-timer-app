@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import DarkmodeToggle from '@/components/DarkmodeToggle.vue';
+import TheDarkmodeToggle from '@/components/singletons/TheDarkmodeToggle.vue';
+import TheNotesToggle from '@/components/singletons/TheNotesToggle.vue';
 import DayOfYearDisplay from '@/components/DayOfYearDisplay.vue';
 import CalendarWeekDisplay from '@/components/CalendarWeekDisplay.vue';
 import TimerSumDisplay from '@/components/TimerSumDisplay.vue';
@@ -11,7 +12,8 @@ import TimerSumDisplay from '@/components/TimerSumDisplay.vue';
 			<DayOfYearDisplay /> | <CalendarWeekDisplay /> | <TimerSumDisplay />
         </div>
 		<div class="header-settings">
-			<DarkmodeToggle />
+			<TheNotesToggle />
+			<TheDarkmodeToggle />
 		</div>
 	</header>
 </template>
@@ -28,8 +30,16 @@ header {
 	width: 100%;
 	height: var(--header-height);
 	background-color: var(--secondary-color);
+	z-index: 200;
 
 	.header-info {
+		display: flex;
+		place-items: center;
+		gap: 2rem;
+		color: var(--primary-color);
+	}
+
+	.header-settings {
 		display: flex;
 		place-items: center;
 		gap: 2rem;

@@ -2,6 +2,8 @@
 import { ref } from 'vue';
 import { type Timer } from '@/types/Timer';
 
+import GenericButton from './generics/GenericButton.vue';
+
 import { useLabels } from '@/composables/useLabels';
 import { useTimerSum } from '@/composables/useTimerSum';
 
@@ -76,7 +78,10 @@ function resetName(timer: Timer) {
 </script>
 
 <template>
-    <div @click="addTimer">add timer</div>
+    <GenericButton height="50px" @click="addTimer">
+        {{ Labels.ADD_TIMER }}
+    </GenericButton>
+
     <TransitionGroup name="fade" tag="ul" class="timers">
         <li v-for="timer in timers" class="timer-row" :key="timer.id">
             <div class="timer">
@@ -130,9 +135,8 @@ function resetName(timer: Timer) {
                 </button>
                 <span>{{ timer.display }}</span>
             </div>
-            <div @click="removeTimer(timer)">
-                remove timer
-            </div>
+
+            <GenericButton height="50px" @click="removeTimer(timer)">{{ Labels.REMOVE_TIMER }}</GenericButton>
         </li>
     </TransitionGroup>
 </template>
@@ -148,6 +152,7 @@ function resetName(timer: Timer) {
         display: flex;
         align-items: center;
         height: 70px;
+        gap: 1rem;
 
         .timer {
             display: flex;

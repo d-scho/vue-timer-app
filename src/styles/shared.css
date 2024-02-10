@@ -1,3 +1,16 @@
 :root {
 	--header-height: 62px;
 }
+
+body, #app {
+	min-height: 100vh;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+}
+
+.wrapper {
+	flex: 1;
+}
