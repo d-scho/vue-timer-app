@@ -12,7 +12,7 @@ const { Labels } = useLabels();
 	<span>{{
 		pruneLabels
 			? Labels.SUM_OF_TIMERS_SHORT
-			: Labels.SUM_OF_TIMERS_SHORT
+			: Labels.SUM_OF_TIMERS
 	}}: {{timerSum }}</span>
 </template>
 
