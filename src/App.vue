@@ -30,18 +30,17 @@ const { isShowNotes } = useNotesToggle();
 
 <style scoped lang="scss">
 .wrapper {
-    padding: 1rem 6rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding-top: calc(var(--header-height) + 2rem);
+    padding: calc(var(--header-height) + 1rem) 6rem 1rem;
 
     .meta {
         display: flex;
         justify-content: space-between;
         gap: 2rem;
-        height: calc(70px + 0.8rem);
-        min-width: 636px;
+        height: 68px;
+        min-width: var(--min-width-content);
 
         & > * {
             display: flex;

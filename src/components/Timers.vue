@@ -163,7 +163,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
         align-items: center;
         height: 70px;
         gap: 1rem;
-        min-width: 636px;
+        min-width: var(--min-width-content);
 
         .timer {
             display: flex;
@@ -175,6 +175,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
             border-radius: 10px;
             background-color: rgba(120, 120, 120, 0.1);
             flex: 1;
+            height: 68px;
 
             .timer-name-wrapper {
                 position: relative;
@@ -184,7 +185,6 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                     height: 40px;
                     padding-inline: 10px;
                     border-radius: 5px;
-                    min-width: 150px;
                     width: 100%;
                     font-weight: bold;
                     color: var(--text-color);
@@ -206,6 +206,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                     right: 0;
                     border-radius: 5px;
                     background-color: var(--element-bg-color);
+                    border-color: var(--element-bg-color);
 
                     & > svg {
                         height: 14px;
