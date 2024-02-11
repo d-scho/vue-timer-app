@@ -1,34 +1,30 @@
 import type { Timer, TimerDTO } from '../types/Timer';
 import convertMillisecondsToReadableFormat from '@/methods/convertMillisecondsToReadableFormat';
+import { Themes, type Theme } from '@/composables/useTheme';
 
 const LocalStorageKey = {
-    storedIsDarkmodeEnabled: 'vue-timer-app_isDarkmodeEnabled',
+    storedTheme: 'vue-timer-app_theme',
     storedNotes: 'vue-timer-app_notes',
     storedTimers: 'vue-timer-app_timers',
 } as const;
 
-// darkmode handling
-export function getStoredIsDarkmodeEnabled() {
-    const storage = localStorage.getItem(
-        LocalStorageKey.storedIsDarkmodeEnabled
-    );
+// theme handling
+export function getStoredTheme(): Theme {
+    const storage = localStorage.getItem(LocalStorageKey.storedTheme);
     if (storage) {
-        return JSON.parse(storage) as boolean;
+        return storage as Theme;
     } else if (
         window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches
     ) {
-        setStoredIsDarkmodeEnabled(true);
-        return true;
+        setStoredTheme(Themes.DARKMODE);
+        return Themes.DARKMODE;
     } else {
-        return false;
+        return Themes.VANILLA;
     }
 }
-export function setStoredIsDarkmodeEnabled(value: boolean) {
-    localStorage.setItem(
-        LocalStorageKey.storedIsDarkmodeEnabled,
-        String(value)
-    );
+export function setStoredTheme(value: Theme) {
+    localStorage.setItem(LocalStorageKey.storedTheme, value);
 }
 
 // textarea content handling

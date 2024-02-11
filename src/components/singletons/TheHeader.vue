@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DarkmodeToggle from '@/components/DarkmodeToggle.vue';
+import ThemeSelector from '@/components/ThemeSelector.vue';
 import NotesToggle from '@/components/NotesToggle.vue';
 </script>
 
@@ -8,8 +8,7 @@ import NotesToggle from '@/components/NotesToggle.vue';
         <div>ManyATimer</div>
         <div>
             <NotesToggle />
-            theme selector
-            <DarkmodeToggle />
+            <ThemeSelector />
         </div>
     </header>
 </template>

@@ -22,14 +22,14 @@
     --bg-color: #222222;
 }
 
-/* .bubblegum {
-	--text-color: #ffffff;
-	--text-color-disabled: #f9ff94;
-	--text-color-placeholder: #ffad94;
+.bubblegum {
+    --text-color: #ffffff;
+    --text-color-disabled: #f9ff94;
+    --text-color-placeholder: #ffad94;
 
-	--element-bg-color: #df66a2;
-	--element-bg-color-disabled: #ffcae5;
+    --element-bg-color: #df66a2;
+    --element-bg-color-disabled: #ffcae5;
 
-	--bg-color-header: #ff63ca;
-	--bg-color: #ffc3c3;
-} */
+    --bg-color-header: #ff63ca;
+    --bg-color: #ffc3c3;
+}
