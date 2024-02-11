@@ -1,25 +1,25 @@
 :root {
-	--text-color: #030303;
-	--text-color-disabled: #c7c7c7;
-	--text-color-placeholder: #b8b8b8;
+    --text-color: #030303;
+    --text-color-disabled: #c7c7c7;
+    --text-color-placeholder: #b8b8b8;
 
-	--element-bg-color: #ffffff;
-	--element-bg-color-disabled: #e0e0e0;
+    --element-bg-color: #ffffff;
+    --element-bg-color-disabled: #e0e0e0;
 
-	--bg-color-header: #fcfcfc;
-	--bg-color: #fcfcfc;
+    --bg-color-header: #fcfcfc;
+    --bg-color: #fcfcfc;
 }
 
 .darkmode {
-	--text-color: #F0F7F4;
-	--text-color-disabled: #8a8a8a;
-	--text-color-placeholder: #8a8a8a;
+    --text-color: #f0f7f4;
+    --text-color-disabled: #8a8a8a;
+    --text-color-placeholder: #8a8a8a;
 
-	--element-bg-color: #121212;
-	--element-bg-color-disabled: #2c2c2c;
+    --element-bg-color: #121212;
+    --element-bg-color-disabled: #2c2c2c;
 
-	--bg-color-header: #222222;
-	--bg-color: #222222;
+    --bg-color-header: #222222;
+    --bg-color: #222222;
 }
 
 /* .bubblegum {

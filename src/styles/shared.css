@@ -1,21 +1,22 @@
 :root {
-	--header-height: 62px;
+    --header-height: 62px;
 }
 
 body {
-	font-family: sans-serif;
-	background-color: var(--bg-color);
+    font-family: sans-serif;
+    background-color: var(--bg-color);
 }
 
-body, #app {
-	min-height: 100vh;
+body,
+#app {
+    min-height: 100vh;
 }
 
 #app {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .wrapper {
-	flex: 1;
+    flex: 1;
 }

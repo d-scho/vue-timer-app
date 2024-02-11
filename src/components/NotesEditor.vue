@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { getStoredNotes, setStoredNotes } from '@/methods/localStorageHandling';
-import { useLabels } from '@/composables/useLabels';
+import { ref } from 'vue'
+import { getStoredNotes, setStoredNotes } from '@/methods/localStorageHandling'
+import { useLabels } from '@/composables/useLabels'
 
-const { Labels } = useLabels();
-const notes = ref(getStoredNotes());
+const { Labels } = useLabels()
+const notes = ref(getStoredNotes())
 </script>
 
 <template>
-	<Transition name="fade">
-		<div  class="notes-wrapper">
-			<textarea
-				rows="20"
-				:placeholder="Labels.NOTES_EDITOR_PLACEHOLDER"
-				v-model="notes"
-				@focusout="setStoredNotes(notes)"
-			></textarea>
-		</div>
-	</Transition>
+    <Transition name="fade">
+        <div class="notes-wrapper">
+            <textarea
+                rows="20"
+                :placeholder="Labels.NOTES_EDITOR_PLACEHOLDER"
+                v-model="notes"
+                @focusout="setStoredNotes(notes)"
+            ></textarea>
+        </div>
+    </Transition>
 </template>
 
 <style scoped lang="scss">
@@ -32,19 +32,19 @@ const notes = ref(getStoredNotes());
     height: 100vh;
     padding: calc(var(--header-height) + 2rem) 6rem 2rem;
 
-	textarea {
-		width: 100%;
-		height: 100%;
-		border-radius: 10px;
-		padding: 6px 10px;
-		resize: none;
-		color: var(--text-color);
-		background-color: var(--element-bg-color);
+    textarea {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        padding: 6px 10px;
+        resize: none;
+        color: var(--text-color);
+        background-color: var(--element-bg-color);
 
-		&::placeholder {
-			color: var(--text-color-placeholder);
-		}
-	}
+        &::placeholder {
+            color: var(--text-color-placeholder);
+        }
+    }
 }
 
 .fade-enter-active,
