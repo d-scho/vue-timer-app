@@ -27,14 +27,15 @@ button {
 	fill: var(--text-color);
 	stroke: var(--text-color);
 	background-color: var(--element-bg-color);
-	border-color: var(--element-bg-color-off);
+	border-color: var(--element-bg-color);
 
 	&:disabled {
 		cursor: not-allowed;
-		color: var(--text-color-off);
-		background-color: var(--element-bg-color-off);
-		fill: var(--text-color-off);
-		stroke: var(--text-color-off);
+		color: var(--text-color-disabled);
+		fill: var(--text-color-disabled);
+		stroke: var(--text-color-disabled);
+		background-color: var(--element-bg-color-disabled);
+		border-color: var(--element-bg-color-disabled);
 	}
 }
 </style>

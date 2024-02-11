@@ -42,7 +42,7 @@ const notes = ref(getStoredNotes());
 		background-color: var(--element-bg-color);
 
 		&::placeholder {
-			color: var(--text-color-off);
+			color: var(--text-color-placeholder);
 		}
 	}
 }

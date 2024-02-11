@@ -31,7 +31,7 @@ header {
 	position: fixed;
 	width: 100%;
 	height: var(--header-height);
-	background-color: var(--bg-color);
+	background-color: var(--bg-color-header);
 	z-index: 200;
 
 	& > * {

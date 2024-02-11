@@ -132,7 +132,7 @@ const timerRefs = ref<Array<HTMLElement>|null>(null);
                     flex-grow: 1;
 
                     &::placeholder {
-                        color: var(--text-color-off);
+                        color: var(--text-color-placeholder);
                     }
                 }
 
