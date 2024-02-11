@@ -23,12 +23,14 @@ header {
     width: 100%;
     height: var(--header-height);
     background-color: var(--bg-color-header);
+    display: flex;
 
     .inner {
         display: flex;
         justify-content: space-between;
         gap: 2rem;
         min-width: var(--min-width-content);
+        width: 100%;
 
         & > * {
             display: flex;

@@ -67,7 +67,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                         xmlns="http://www.w3.org/2000/svg"
                         width="22"
                         height="22"
-                        viewBox="-4 -4 28 28"
+                        viewBox="-4 -3 28 28"
                     >
                         <path d="M3 22v-20l18 10-18 10z" />
                     </svg>
@@ -96,7 +96,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                     <svg
                         width="22"
                         height="22"
-                        viewBox="-250 -220 2160 2160"
+                        viewBox="-140 -140 2160 2160"
                         xmlns="http://www.w3.org/2000/svg"
                     >
                         <path
@@ -112,7 +112,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                 <svg
                     width="30"
                     height="30"
-                    viewBox="-4 -5 31 31"
+                    viewBox="-4 -4 31 31"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                 >
@@ -220,16 +220,17 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
             }
 
             span.display {
-                font-size: 20px;
+                font-size: 18px;
                 font-weight: bold;
                 height: 39px;
-                width: 110px;
+                width: 106px;
                 text-align: center;
                 border: 2px solid black;
-                padding: 6px 12px;
+                padding: 7px 12px;
                 border-radius: 5px;
                 color: var(--text-color);
                 background-color: var(--element-bg-color);
+                text-shadow: 2px 2px 2px var(--element-bg-color-disabled);
             }
         }
     }

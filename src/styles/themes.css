@@ -24,12 +24,12 @@
 
 .bubblegum {
     --text-color: #ffffff;
-    --text-color-disabled: #f9ff94;
-    --text-color-placeholder: #ffad94;
+    --text-color-disabled: #f085d5;
+    --text-color-placeholder: #ffcbe1;
 
     --element-bg-color: #df66a2;
-    --element-bg-color-disabled: #ffcae5;
+    --element-bg-color-disabled: #fabadb;
 
-    --bg-color-header: #ff63ca;
+    --bg-color-header: #ff87b9;
     --bg-color: #ffc3c3;
 }
