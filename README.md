@@ -16,12 +16,19 @@ bun install
 bun run dev
 ```
 
-## Type-check, compile and minify for production
+## Building
+
+### Type-check, compile and minify for production
 ```sh
-bun run build
+bun run build:production
 ```
 
-## Type-check, compile and minify for production as singlefile to run serverless
+### Type-check, compile and minify as singlefile to run serverless
 ```sh
 bun run build:singlefile
+```
+
+### Run both build commands
+```sh
+bun run build
 ```

@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "build:singlefile": "run-p type-check \"build-only-singlefile {@}\" --",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "build-only-production": "vite build",
     "build-only-singlefile": "vite build --config vite.config.singlefile.ts",
-    "type-check": "vue-tsc --build --force"
+    "build:production": "run-p type-check build-only-production --",
+    "build:singlefile": "run-p type-check build-only-singlefile --",
+    "build": "run-p type-check build-only-production build-only-singlefile --"
   },
   "dependencies": {
     "@vueuse/core": "^10.7.2",
