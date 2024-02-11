@@ -176,7 +176,7 @@ const timerRefs = ref<Array<HTMLElement>|null>(null);
 .slide-move,
 .slide-enter-active,
 .slide-leave-active {
-    transition: all 256ms cubic-bezier(0.55, 0, 0.1, 0.6);
+    transition: all 256ms ease-in;
 }
 
 .slide-enter-from {
@@ -185,10 +185,10 @@ const timerRefs = ref<Array<HTMLElement>|null>(null);
 }
 .slide-leave-to {
     opacity: 0;
-    transform: scaleY(0) translateY(68px);
+    transform: scaleY(0) translateY(calc(136px + 0.8rem));
 }
 
 .slide-leave-active {
-    margin-block: calc((68px + 0.8rem) * -1); // you are supposed to set position: absolute here, but that didn't work
+    margin-top: calc((68px + 0.4rem) * -1); // you are supposed to set position: absolute here, but that didn't work
 }
 </style>
