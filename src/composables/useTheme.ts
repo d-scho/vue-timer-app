@@ -20,7 +20,9 @@ watch(selectedTheme, (value) => {
     for (const key in Themes) {
         body?.classList.remove(Themes[key as keyof typeof Themes]);
     }
-    body?.classList.add(value);
+    if (value !== Themes.VANILLA) {
+        body?.classList.add(value);
+    }
     setStoredTheme(value);
 });
 
