@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useTimers } from '@/composables/useTimers'
-import { useWidth } from '@/composables/useWidth'
-import { useLabels } from '@/composables/useLabels'
+import { useTimers } from '@/composables/useTimers';
+import { useWidth } from '@/composables/useWidth';
+import { useLabels } from '@/composables/useLabels';
 
-const { timerSum } = useTimers()
-const { pruneLabels } = useWidth()
-const { Labels } = useLabels()
+const { timerSum } = useTimers();
+const { pruneLabels } = useWidth();
+const { Labels } = useLabels();
 </script>
 
 <template>

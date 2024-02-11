@@ -12,5 +12,5 @@ export function useLabels() {
             SHOW_NOTES: 'Show notes',
             HIDE_NOTES: 'Hide notes',
         },
-    } as const
+    } as const;
 }

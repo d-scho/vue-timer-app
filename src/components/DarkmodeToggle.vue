@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useDarkmode } from '@/composables/useDarkmode'
+import { useDarkmode } from '@/composables/useDarkmode';
 
-const { isDarkmodeEnabled, setStoredIsDarkmodeEnabled } = useDarkmode()
+const { isDarkmodeEnabled, setStoredIsDarkmodeEnabled } = useDarkmode();
 
 function toggleDarkmode() {
-    isDarkmodeEnabled.value = !isDarkmodeEnabled.value
-    setStoredIsDarkmodeEnabled(isDarkmodeEnabled.value)
+    isDarkmodeEnabled.value = !isDarkmodeEnabled.value;
+    setStoredIsDarkmodeEnabled(isDarkmodeEnabled.value);
 }
 </script>
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { getStoredNotes, setStoredNotes } from '@/methods/localStorageHandling'
-import { useLabels } from '@/composables/useLabels'
+import { ref } from 'vue';
+import { getStoredNotes, setStoredNotes } from '@/methods/localStorageHandling';
+import { useLabels } from '@/composables/useLabels';
 
-const { Labels } = useLabels()
-const notes = ref(getStoredNotes())
+const { Labels } = useLabels();
+const notes = ref(getStoredNotes());
 </script>
 
 <template>

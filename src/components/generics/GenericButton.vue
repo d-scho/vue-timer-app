@@ -1,18 +1,18 @@
 <script setup lang="ts">
 const emit = defineEmits<{
-    (e: 'click'): void
-}>()
+    (e: 'click'): void;
+}>();
 
 withDefaults(
     defineProps<{
-        width?: `${string}px`
-        height?: `${string}px`
+        width?: `${string}px`;
+        height?: `${string}px`;
     }>(),
     {
         width: '50px',
         height: '40px',
     }
-)
+);
 </script>
 
 <template>

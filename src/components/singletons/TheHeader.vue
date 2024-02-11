@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import TimersAdder from '@/components/TimersAdder.vue'
-import DarkmodeToggle from '@/components/DarkmodeToggle.vue'
-import NotesToggle from '@/components/NotesToggle.vue'
-import DisplayDayOfYear from '@/components/DisplayDayOfYear.vue'
-import DisplayCalendarWeek from '@/components/DisplayCalendarWeek.vue'
-import TimersSum from '@/components/TimersSum.vue'
+import TimersAdder from '@/components/TimersAdder.vue';
+import DarkmodeToggle from '@/components/DarkmodeToggle.vue';
+import NotesToggle from '@/components/NotesToggle.vue';
+import DisplayDayOfYear from '@/components/DisplayDayOfYear.vue';
+import DisplayCalendarWeek from '@/components/DisplayCalendarWeek.vue';
+import TimersSum from '@/components/TimersSum.vue';
 </script>
 
 <template>

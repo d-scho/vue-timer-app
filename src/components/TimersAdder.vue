@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import GenericButton from '@/components/generics/GenericButton.vue'
-import { useLabels } from '@/composables/useLabels'
-import { useTimers } from '@/composables/useTimers'
+import GenericButton from '@/components/generics/GenericButton.vue';
+import { useLabels } from '@/composables/useLabels';
+import { useTimers } from '@/composables/useTimers';
 
-const { Labels } = useLabels()
-const { addTimer } = useTimers()
+const { Labels } = useLabels();
+const { addTimer } = useTimers();
 </script>
 
 <template>

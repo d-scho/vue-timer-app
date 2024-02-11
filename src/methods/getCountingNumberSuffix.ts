@@ -1,16 +1,16 @@
 export default function getCountingNumberSuffix(number: number) {
     if ([11, 12, 13].includes(number % 100)) {
-        return 'th'
+        return 'th';
     } else {
         switch (number % 10) {
             case 1:
-                return 'st'
+                return 'st';
             case 2:
-                return 'nd'
+                return 'nd';
             case 3:
-                return 'rd'
+                return 'rd';
             default:
-                return 'th'
+                return 'th';
         }
     }
 }

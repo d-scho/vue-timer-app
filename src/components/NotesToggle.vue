@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import GenericButton from '@/components/generics/GenericButton.vue'
-import { useNotesToggle } from '@/composables/useNotesToggle'
-import { useLabels } from '@/composables/useLabels'
+import GenericButton from '@/components/generics/GenericButton.vue';
+import { useNotesToggle } from '@/composables/useNotesToggle';
+import { useLabels } from '@/composables/useLabels';
 
-const { toggleShowNotes, isShowNotes } = useNotesToggle()
-const { Labels } = useLabels()
+const { toggleShowNotes, isShowNotes } = useNotesToggle();
+const { Labels } = useLabels();
 </script>
 
 <template>

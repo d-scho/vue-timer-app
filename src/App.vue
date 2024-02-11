@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import TheHeader from '@/components/singletons/TheHeader.vue'
-import NotesEditor from '@/components/NotesEditor.vue'
-import Timers from '@/components/Timers.vue'
-import { useNotesToggle } from '@/composables/useNotesToggle'
+import TheHeader from '@/components/singletons/TheHeader.vue';
+import NotesEditor from '@/components/NotesEditor.vue';
+import Timers from '@/components/Timers.vue';
+import { useNotesToggle } from '@/composables/useNotesToggle';
 
-const { isShowNotes } = useNotesToggle()
+const { isShowNotes } = useNotesToggle();
 </script>
 
 <template>

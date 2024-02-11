@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-import GenericButton from './generics/GenericButton.vue'
+import GenericButton from './generics/GenericButton.vue';
 
-import { useTimers } from '@/composables/useTimers'
+import { useTimers } from '@/composables/useTimers';
 
 const {
     removeTimer,
@@ -13,9 +13,9 @@ const {
     confirmNameChange,
     resetName,
     timers,
-} = useTimers()
+} = useTimers();
 
-const timerRefs = ref<Array<HTMLElement> | null>(null)
+const timerRefs = ref<Array<HTMLElement> | null>(null);
 </script>
 
 <template>

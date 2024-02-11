@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useLabels } from '@/composables/useLabels'
-import { useWidth } from '@/composables/useWidth'
-import getDayOfYear from '@/methods/getDayOfYear'
-import getCountingNumberSuffix from '@/methods/getCountingNumberSuffix'
+import { ref } from 'vue';
+import { useLabels } from '@/composables/useLabels';
+import { useWidth } from '@/composables/useWidth';
+import getDayOfYear from '@/methods/getDayOfYear';
+import getCountingNumberSuffix from '@/methods/getCountingNumberSuffix';
 
-const { Labels } = useLabels()
-const dayOfYear = ref(getDayOfYear())
-const { pruneLabels } = useWidth()
+const { Labels } = useLabels();
+const dayOfYear = ref(getDayOfYear());
+const { pruneLabels } = useWidth();
 </script>
 
 <template>
