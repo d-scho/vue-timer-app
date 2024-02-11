@@ -8,7 +8,7 @@ const { addTimer } = useTimers();
 </script>
 
 <template>
-    <GenericButton @click="addTimer" height="30px" width="100px">
+    <GenericButton @click="addTimer" width="100px">
         {{ Labels.ADD_TIMER }}
     </GenericButton>
 </template>
