@@ -8,6 +8,7 @@ export function useLabels() {
             CURRENT_CALENDAR_WEEK_SHORT: 'CW',
             DAY_OF_THE_YEAR: 'Day of the year',
             DAY_OF_THE_YEAR_SHORT: 'DOY',
+            TIMER_INPUT_PLACEHOLDER: 'Issue / topic',
             NOTES_EDITOR_PLACEHOLDER: 'Make your notes here...',
             SHOW_NOTES: 'Show notes',
             HIDE_NOTES: 'Hide notes',

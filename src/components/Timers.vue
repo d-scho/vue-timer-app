@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
 import GenericButton from './generics/GenericButton.vue';
-
 import { useTimers } from '@/composables/useTimers';
+import { useLabels } from '@/composables/useLabels';
+
+const { Labels } = useLabels();
 
 const {
     removeTimer,
@@ -31,7 +32,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                         v-model.lazy="timer.name"
                         @keydown.enter="confirmNameChange(timerRefs, timer)"
                         @focusout="confirmNameChange(timerRefs, timer)"
-                        placeholder="Issue / topic"
+                        :placeholder="Labels.TIMER_INPUT_PLACEHOLDER"
                     />
                     <button
                         v-if="timer.name.length > 0"
