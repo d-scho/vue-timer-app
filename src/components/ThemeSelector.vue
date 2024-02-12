@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useTheme } from '@/composables/useTheme';
-const { selectedTheme, Themes } = useTheme();
+import { useThemes } from '@/composables/useThemes';
+const { selectedTheme, Themes } = useThemes();
 </script>
 
 <template>
@@ -15,7 +15,7 @@ const { selectedTheme, Themes } = useTheme();
 select {
     height: 40px;
     color: var(--text-color);
-    border: 2px solid var(--element-bg-color);
+    border: 2px solid var(--element-border-color);
     background-color: var(--element-bg-color);
     border-radius: 5px;
     border-style: outset;

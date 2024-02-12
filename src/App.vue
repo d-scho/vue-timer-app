@@ -42,7 +42,7 @@ const { isShowNotes } = useNotesToggle();
         height: 68px;
         min-width: var(--min-width-content);
         font-weight: bold;
-        text-shadow: 2px 2px 2px var(--element-bg-color);
+        text-shadow: 2px 2px 2px var(--text-shadow-color);
         font-size: 18px;
 
         & > * {

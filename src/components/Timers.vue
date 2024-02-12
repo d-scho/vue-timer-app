@@ -194,6 +194,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
 
                     &::placeholder {
                         color: var(--text-color-placeholder);
+                        font-weight: bold;
                     }
                 }
 
@@ -207,7 +208,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                     right: 0;
                     border-radius: 5px;
                     background-color: var(--element-bg-color);
-                    border-color: var(--element-bg-color);
+                    border-color: var(--element-border-color);
 
                     & > svg {
                         height: 14px;
@@ -230,7 +231,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                 border-radius: 5px;
                 color: var(--text-color);
                 background-color: var(--element-bg-color);
-                text-shadow: 2px 2px 2px var(--element-bg-color-disabled);
+                text-shadow: 2px 2px 2px var(--text-shadow-color);
             }
         }
     }

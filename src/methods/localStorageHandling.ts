@@ -1,6 +1,6 @@
 import type { Timer, TimerDTO } from '../types/Timer';
 import convertMillisecondsToReadableFormat from '@/methods/convertMillisecondsToReadableFormat';
-import { Themes, type Theme } from '@/composables/useTheme';
+import { Themes, type Theme } from '@/composables/useThemes';
 
 const LocalStorageKey = {
     storedTheme: 'vue-timer-app_theme',
@@ -20,7 +20,7 @@ export function getStoredTheme(): Theme {
         setStoredTheme(Themes.DARKMODE);
         return Themes.DARKMODE;
     } else {
-        return Themes.VANILLA;
+        return Themes.LIGHTMODE;
     }
 }
 export function setStoredTheme(value: Theme) {

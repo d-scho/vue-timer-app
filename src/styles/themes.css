@@ -1,9 +1,12 @@
+/* lightmode */
 :root {
     --text-color: #030303;
     --text-color-disabled: #c7c7c7;
     --text-color-placeholder: #b8b8b8;
+    --text-shadow-color: #c7c7c7;
 
     --element-bg-color: #ffffff;
+    --element-border-color: #cfcfcf;
     --element-bg-color-disabled: #e0e0e0;
 
     --bg-color-header: #fcfcfc;
@@ -14,8 +17,10 @@
     --text-color: #f0f7f4;
     --text-color-disabled: #8a8a8a;
     --text-color-placeholder: #8a8a8a;
+    --text-shadow-color: #b1b1b1;
 
     --element-bg-color: #121212;
+    --element-border-color: #8f8f8f;
     --element-bg-color-disabled: #2c2c2c;
 
     --bg-color-header: #222222;
@@ -26,10 +31,26 @@
     --text-color: #ffffff;
     --text-color-disabled: #f085d5;
     --text-color-placeholder: #ffcbe1;
+    --text-shadow-color: #df66a2;
 
     --element-bg-color: #df66a2;
+    --element-border-color: #da54ad;
     --element-bg-color-disabled: #fabadb;
 
     --bg-color-header: #ff87b9;
     --bg-color: #ffc3c3;
+}
+
+.matrix {
+    --text-color: #f0f7f4;
+    --text-color-disabled: #8a8a8a;
+    --text-color-placeholder: #8a8a8a;
+    --text-shadow-color: #599759;
+
+    --element-bg-color: #112c11;
+    --element-border-color: #599759;
+    --element-bg-color-disabled: #004119;
+
+    --bg-color-header: #001603;
+    --bg-color: #001603;
 }

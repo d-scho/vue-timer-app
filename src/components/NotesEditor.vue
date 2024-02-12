@@ -43,6 +43,7 @@ const notes = ref(getStoredNotes());
 
         &::placeholder {
             color: var(--text-color-placeholder);
+            font-weight: bold;
         }
     }
 }

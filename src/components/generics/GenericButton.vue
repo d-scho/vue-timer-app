@@ -30,7 +30,7 @@ button {
     fill: var(--text-color);
     stroke: var(--text-color);
     background-color: var(--element-bg-color);
-    border-color: var(--element-bg-color);
+    border-color: var(--element-border-color);
 
     &:disabled {
         cursor: not-allowed;
