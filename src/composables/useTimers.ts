@@ -34,6 +34,7 @@ function addTimer() {
 }
 
 function removeTimer(timer: Timer) {
+    clearInterval(timer.interval);
     const index = timers.value.indexOf(timer);
     if (index !== -1) {
         timers.value.splice(index, 1);
