@@ -22,7 +22,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
 <template>
     <TransitionGroup name="slide" tag="ul" class="timers">
         <li v-for="timer in timers" class="timer-row" :key="timer.id">
-            <div class="timer">
+            <div class="timer" :class="{ running: timer.isRunning }">
                 <div class="timer-name-wrapper">
                     <input
                         class="timer-name"
@@ -172,11 +172,15 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
             justify-content: flex-end;
             gap: 0.8rem;
             padding: 0.8rem;
-            border: 1px solid rgb(158, 158, 158);
+            border: 1px solid var(--timer-border-color);
             border-radius: 10px;
-            background-color: rgba(120, 120, 120, 0.1);
+            background-color: var(--timer-bg-color);
             flex: 1;
             height: 68px;
+
+            &.running {
+                background-color: var(--timer-running-bg-color);
+            }
 
             .timer-name-wrapper {
                 position: relative;
