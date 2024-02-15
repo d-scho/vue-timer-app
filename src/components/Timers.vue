@@ -22,7 +22,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
 <template>
     <TransitionGroup name="slide" tag="ul" class="timers">
         <li v-for="timer in timers" class="timer-row" :key="timer.id">
-            <div class="timer" :class="{ running: timer.isRunning }">
+            <div class="timer">
                 <div class="timer-name-wrapper">
                     <input
                         class="timer-name"
@@ -59,7 +59,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                     </button>
                 </div>
                 <GenericButton
-                    v-if="!timer.isRunning"
+                    :disabled="timer.isRunning"
                     @click="startTimer(timer)"
                     height="40px"
                 >
@@ -73,7 +73,7 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
                     </svg>
                 </GenericButton>
                 <GenericButton
-                    v-if="timer.isRunning"
+                    :disabled="!timer.isRunning"
                     @click="stopTimer(timer)"
                     height="40px"
                 >
@@ -177,10 +177,6 @@ const timerRefs = ref<Array<HTMLElement> | null>(null);
             background-color: var(--timer-bg-color);
             flex: 1;
             height: 68px;
-
-            &.running {
-                background-color: var(--timer-running-bg-color);
-            }
 
             .timer-name-wrapper {
                 position: relative;

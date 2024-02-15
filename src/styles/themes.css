@@ -6,8 +6,7 @@
     --text-shadow-color: #c7c7c7;
 
     --timer-border-color: #cfcfcf;
-    --timer-bg-color: #fcfcfc;
-    --timer-running-bg-color: #e2e2e2;
+    --timer-bg-color: #f0f0f0;
 
     --element-bg-color: #ffffff;
     --element-border-color: #cfcfcf;
@@ -24,8 +23,7 @@
     --text-shadow-color: #b1b1b1;
 
     --timer-border-color: #8f8f8f;
-    --timer-bg-color: #383838;
-    --timer-running-bg-color: #181818;
+    --timer-bg-color: #292929;
 
     --element-bg-color: #121212;
     --element-border-color: #8f8f8f;
@@ -37,17 +35,16 @@
 
 .bubblegum {
     --text-color: #ffffff;
-    --text-color-disabled: #f085d5;
+    --text-color-disabled: #f0b1e0;
     --text-color-placeholder: #ffcbe1;
     --text-shadow-color: #df66a2;
 
     --timer-border-color: #da54ad;
     --timer-bg-color: #ff87b9;
-    --timer-running-bg-color: #e4659a;
 
     --element-bg-color: #df66a2;
     --element-border-color: #da54ad;
-    --element-bg-color-disabled: #fabadb;
+    --element-bg-color-disabled: #df9bbe;
 
     --bg-color-header: #ff87b9;
     --bg-color: #ffc3c3;
@@ -55,17 +52,16 @@
 
 .matrix {
     --text-color: #f0f7f4;
-    --text-color-disabled: #817e7e;
+    --text-color-disabled: #707070;
     --text-color-placeholder: #8a8a8a;
     --text-shadow-color: #599759;
 
-    --timer-border-color: #599759;
-    --timer-bg-color: #003108;
-    --timer-running-bg-color: #001f05;
+    --timer-border-color: #2d552d;
+    --timer-bg-color: #012006;
 
     --element-bg-color: #112c11;
     --element-border-color: #599759;
-    --element-bg-color-disabled: #18251d;
+    --element-bg-color-disabled: #282e2a;
 
     --bg-color-header: #000f02;
     --bg-color: #001302;
